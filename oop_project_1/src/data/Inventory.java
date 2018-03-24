@@ -13,4 +13,8 @@ public class Inventory {
     
     // how should all the data be held?
     
+    
+    public void populate_data(String text_path){
+        // load the text file and populate our data based on that
+    }
 }
