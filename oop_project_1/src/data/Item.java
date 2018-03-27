@@ -37,7 +37,15 @@ public class Item {
         this.item_desc = d;
     }
     
+    // the getters
+    public int get_qty(){return this.qty;}
+    public double get_price(){return this.price;}
+    public String get_item_id(){return this.item_id;}
+    public String get_type(){return this.type;}
+    public String get_item_name(){return this.item_name;}
+    public String get_item_desc(){return this.item_desc;}
     
+    // for outputting
     @Override
     public String toString(){
         return this.qty + " " + this.type + " " + this.item_name + " " + this.price;

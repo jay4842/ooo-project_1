@@ -86,6 +86,9 @@ public class Inventory {
                      in.get("Des").toString());
              Util.println(temp.toString());
              
+             // now set by type
+             String type = temp.get_type();
+             Util.println(type);
         }
     }
 }
