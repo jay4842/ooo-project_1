@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import javax.swing.filechooser.*;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
@@ -62,7 +63,7 @@ public class Inventory {
                 ...
         */
         
-        Object obj = new JSONParser().parse(new FileReader("src/res/items.json"));
+       Object obj = new JSONParser().parse(new FileReader("src/res/items.json"));
         
         // typecasting obj to JSONObject
         JSONObject jo = (JSONObject) obj;
@@ -78,7 +79,7 @@ public class Inventory {
              JSONObject in = (JSONObject)itr.next();
              //(double p, String i, String t, String n, String d)
              Item temp = new Item((double)in.get("Price"),
-                     (int)in.get("QTY"),
+                     Integer.parseInt(in.get("QTY").toString()),
                      in.get("ID").toString(),
                      in.get("Type").toString(),
                      in.get("Name").toString(),

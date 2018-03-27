@@ -2,7 +2,7 @@
 {
     "Items" :[
         {
-            "QTY"   : 10,
+            "QTY"   : "10",
             "ID"    : "F1000",
             "Price" : 215.0,
             "Type"  : "Furniture",
@@ -11,7 +11,7 @@
 	},
 
 	{
-            "QTY"   : 5,
+            "QTY"   : "5",
             "ID"    : "D1001",
             "Price" : 25.0,
             "Type"  : "Decor",

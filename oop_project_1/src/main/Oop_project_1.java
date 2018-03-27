@@ -23,7 +23,7 @@ public class Oop_project_1 {
         try{
             inv.populate_data();
         }catch (Exception e){
-            System.out.println("ERROR: File not found");
+            System.out.println("ERROR: " + e.getMessage());
         }
         
     }
