@@ -9,6 +9,6 @@ package io;
  *
  * @author Jimmy
  */
-public class IO {
+public class Input {
     
 }

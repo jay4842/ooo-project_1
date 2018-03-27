@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package main;
+import data.Inventory;
 
 /**
  *
@@ -16,6 +17,15 @@ public class Oop_project_1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+    
+        // testing the classes before adding the UI component
+        Inventory inv = new Inventory();
+        try{
+            inv.populate_data();
+        }catch (Exception e){
+            System.out.println("ERROR: File not found");
+        }
+        
     }
     
 }
