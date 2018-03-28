@@ -11,7 +11,7 @@ import util.*;
 import java.io.FileReader;
 import java.util.Iterator;
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 
 import javax.swing.filechooser.*;
 
@@ -27,7 +27,9 @@ public class Inventory {
     
     // how should all the data be held?
     //  Split them up by type
-    Hashtable database = new Hashtable();
+    
+
+    HashMap<String, ArrayList<Item>> database = new HashMap<String, ArrayList<Item>>();
     
     ArrayList<Item> Furniture = new ArrayList<>();
     ArrayList<Item> Kitchen = new ArrayList<>();
@@ -35,6 +37,7 @@ public class Inventory {
     ArrayList<Item> BedBath = new ArrayList<>();
     ArrayList<Item> HomeImprovement = new ArrayList<>();
     ArrayList<Item> Outdoor = new ArrayList<>();
+    ArrayList<Item> Rug = new ArrayList<>();
     
     public Inventory(){
         database.put("Furniture", Furniture);
@@ -43,6 +46,7 @@ public class Inventory {
         database.put("Bed & Bath", BedBath);
         database.put("Home Improvement", HomeImprovement);
         database.put("Outdoor",Outdoor);
+        database.put("Rug",Rug);
         // done putting in all the boys in the hashtable
     }
     public void populate_data()throws Exception{
@@ -84,11 +88,16 @@ public class Inventory {
                      in.get("Type").toString(),
                      in.get("Name").toString(),
                      in.get("Des").toString());
-             Util.println(temp.toString());
+             //Util.println(temp.toString());
              
-             // now set by type
+             // now add by type
              String type = temp.get_type();
-             Util.println(type);
+             database.get(type).add(temp);
+             
         }
     }
+    
+    //
+    public HashMap<String, ArrayList<Item>> get_database(){return this.database;}
+    
 }
