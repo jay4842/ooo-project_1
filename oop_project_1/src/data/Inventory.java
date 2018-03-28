@@ -58,7 +58,7 @@ public class Inventory {
             "Items" :[
 		{// Cherry table set
 			"QTY"   : 10,
-			"ID"    : 1000,
+			"ID"    : "F1000",
 			"Price" : 215.00,
 			"Type"  : "Furniture",
 			"Name"  : "Cherry Brown Wooden Table 5 Piece Set",
@@ -100,4 +100,5 @@ public class Inventory {
     //
     public HashMap<String, ArrayList<Item>> get_database(){return this.database;}
     
+    // exception handling later
 }

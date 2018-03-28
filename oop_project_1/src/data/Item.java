@@ -50,4 +50,7 @@ public class Item {
     public String toString(){
         return this.qty + " " + this.type + " " + this.item_name + " " + this.price;
     }
+    
+    // exception handling later
 }
+
