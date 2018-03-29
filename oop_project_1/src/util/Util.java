@@ -8,6 +8,9 @@ package util;
 /**
  *
  * @author Jimmy
+ * 
+ * Will hold utility functions such as calculations, printing to the screen,
+ * and some other functions as well.
  */
 public class Util {
     public static void println(String s){
