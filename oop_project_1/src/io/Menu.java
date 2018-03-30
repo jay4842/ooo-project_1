@@ -155,7 +155,7 @@ public class Menu {
         Util.println("3) User Settings ");
         Util.println("4) Logout ");
         
-        int choice = in.IntPrompt("-> ");
+        int choice = in.IntPrompt("-> "); 
         
         if(choice == 4){
             // return to main menu
@@ -171,27 +171,59 @@ public class Menu {
     
     // for adding new user information
     public void NewUserMenu(){
-        
+        // get desired user name
+        // - check if available
+        // set password
+        // - enter in password twice to verify
+        // and user to all_users
+        // 
+        // keep this user as the current user too
     }
     
     // shop
     public void ShopMenu(){
+        // shop will have a few things..
+        // - Search for items
+        //   - by name
+        //   - by catagory
+        //   - by price
         
+        // shopping will allow users to view a list of items.
+        // they will then be able add items to their cart.
+        // once they are done they will go to the checkout menu.
     }
     
     
     // forgot password
     public void ForgotPasswordMenu(){
+        // users will enter in their email and if the email mathces their 
+        //  account email they will be emailed a code.
+        // They will then enter in the code to change thier password.
+        // - enter it in twice for verification
         
+        // then keep user logged in as current user
     }
     
     // settings
     public void UserSettingsMenu(){
-        
+        // upgrade to UCLUB member
+        // view history.
+        // cancel orders(maybe)
+        // change password
+        // change username
+        // delete account
+        // - ADMIN cannot be deleted
     }
     
     // checkout
     public void CheckoutMenu(){
+        // will ask user to check out
+        // - enter in payment info
+        // - verify they want the items
+        // processes cart
+        // - remove items qty
+        // show purchase complete
+        // return to shop menu
         
     }
     
