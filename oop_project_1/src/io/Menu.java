@@ -54,9 +54,15 @@ public class Menu {
     public void run_menu(){
         while(this.running){
             switch(this.menu_code){
-                case 0: LoginMenu();
+                case 0: MainMenu();
                         break;
-                case 1: MainUserMenu();
+                case 1: LoginMenu();
+                        break;
+                case 2: //new user
+                        break;
+                case 3: MainUserMenu();
+                        break;
+                case 4: // forgot password
                         break;
                 case 7: AdminMenu();
                         break;
@@ -65,10 +71,18 @@ public class Menu {
     }
     // The logic will be handled here
     
+    // main menu
+    public void MainMenu(){
+        Util.clear();
+        Util.println("----- Main -----");
+        Util.println("1) Login ");
+        Util.println("2) New User ");
+        Util.println("3) Exit ");
+    }
+    
     // login menu
     public void LoginMenu(){
         Util.clear();
-        Util.println("----- Login -----");
         String uName = in.StringPrompt("User Name     ->");
         String uPass = in.StringPrompt("User Password ->");
         
@@ -87,6 +101,9 @@ public class Menu {
         }else{
             // now check if the password was correct
             if(this.userManager.login(uPass, pos)){
+                this.currentUser_index = pos;
+                this.CurrentUser = this.userManager.get_allUsers().get(pos);
+                
                 if(uName.equals("ADMIN"))
                     this.menu_code = 7;
                 else
@@ -107,8 +124,19 @@ public class Menu {
     }
     
     // normal user menu
+    // - Search
+    // - Checkout
+    // - settings
+    // - Logout
     public void MainUserMenu(){ // 1
+        Util.clear();
+        Util.println("----- User Menu -----");
+        Util.println("1) Shop ");
+        Util.println("2) Checkout cart < " + this.CurrentUser.getcart().size() + " >");
+        Util.println("3) User Settings ");
+        Util.println("4) Logout ");
         
+    
     }
     
     
