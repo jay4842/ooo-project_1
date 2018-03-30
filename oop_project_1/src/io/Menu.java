@@ -92,9 +92,15 @@ public class Menu {
         
         int choice = in.IntPrompt("-> ");
         if(choice == 1){
-            this.menu_code = 1;
+            this.menu_code = 1; // take to login screen 
             return;
         }
+        //
+        if(choice == 2){
+            this.menu_code = 2; // take to the new user setup
+            return;
+        }
+        //
         if(choice == 3){
             // EXIT program
             Util.clear();
@@ -142,14 +148,45 @@ public class Menu {
     }// end of login
    
      // for adding new user information
+    
+    // need to add a way to cancel the creation of a new user
     public void NewUserMenu(){ // 2
         // get desired user name
         // - check if available
-        // set password
-        // - enter in password twice to verify
-        // and user to all_users
-        // 
-        // keep this user as the current user too
+        Util.clear();
+        boolean done = false;
+        String uPass = "";
+        // end of variable set up
+        
+        Util.println("----- New User -----");
+        String uName = in.StringPrompt("Desired userName -> ");
+        if(this.userManager.checkUsername(uName) != -1){
+            // the user name is already taken
+            in.keyStroakPrompt("That user name is alread taken.\n[Enter]");
+        }else{   
+            // set email (Add checking later)
+            String uEmail = in.StringPrompt("Enter email address linked to account -> ");
+            // set password
+            do{
+                uPass = in.StringPrompt("Create a password  -> ");
+                // - enter in password twice to verify
+                String verify = in.StringPrompt("Re-enter password -> ");
+                if(uPass.equals(verify))
+                    done = true;
+                else
+                    in.keyStroakPrompt("The passwords did not match, please try again\n[Enter]");
+            }while(!done);
+            // and user to all_users
+            this.userManager.addUser(new User(uName,uPass,uEmail));
+            this.userManager.saveUsers(); // update our JSON file too
+            // 
+            // keep this user as the current user too
+            this.currentUser_index = this.userManager.checkUsername(uName);
+            
+            // take the user to the main shop menu
+            in.keyStroakPrompt("Welcome " + uName + "\n[Enter]");
+            this.menu_code = 3;
+        }
     }
     
     // normal user menu
