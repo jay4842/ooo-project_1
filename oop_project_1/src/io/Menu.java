@@ -64,7 +64,13 @@ public class Menu {
                         break;
                 case 4: // forgot password
                         break;
-                case 7: AdminMenu();
+                case 5: // shop/item search
+                        break;
+                case 6: // checkout
+                        break;
+                case 7: // user settings
+                        break;
+                case 8: AdminMenu();
                         break;
             }
         }
@@ -105,9 +111,9 @@ public class Menu {
                 this.CurrentUser = this.userManager.get_allUsers().get(pos);
                 
                 if(uName.equals("ADMIN"))
-                    this.menu_code = 7;
+                    this.menu_code = 8;
                 else
-                    this.menu_code = 1; // menu switch
+                    this.menu_code = 3; // menu switch
                 
                 return; // now were done here
             }
@@ -119,7 +125,7 @@ public class Menu {
     }// end of login
     
     // admin menu
-    public void AdminMenu(){ // 7
+    public void AdminMenu(){ // 8
         
     }
     
@@ -128,7 +134,7 @@ public class Menu {
     // - Checkout
     // - settings
     // - Logout
-    public void MainUserMenu(){ // 1
+    public void MainUserMenu(){ // 3
         Util.clear();
         Util.println("----- User Menu -----");
         Util.println("1) Shop ");
