@@ -72,10 +72,10 @@ public class Inventory {
         // typecasting obj to JSONObject
         JSONObject jo = (JSONObject) obj;
        
-        // getting phoneNumbers
+        // getting list of items
         JSONArray ja = (JSONArray)jo.get("Items");
          
-        // iterating phoneNumbers
+        // iterating Items
         Iterator itr = ja.iterator();
         
         // go through the array to get all the maps

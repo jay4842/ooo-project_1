@@ -35,6 +35,17 @@ public class Input {
     }
     
     // get a double from the user
+    public double DoublePrompt(String prompt){
+        Util.println(prompt);
+        double out = in.nextDouble();
+        
+        return out;
+    }
     
+    // to get an enter key wait
+    public void keyStroakPrompt(String prompt){
+         Util.println(prompt);
+         String hold = in.nextLine();
+    }
     // more?
 }
