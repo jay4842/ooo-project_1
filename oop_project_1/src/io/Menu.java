@@ -33,11 +33,15 @@ import util.Util;
  * - Logout
  * 
  * For now this will be a text based system.
+ * 
+ * The functions are ordered by menu code, they also have their code 
+ * along with the definition.
  */
 public class Menu {
     UserManager userManager;
     User CurrentUser;
-    int currentUser_index; // will be used to remember the position of the user in the user arraylist
+    int currentUser_index; // will be used to remember the position of the 
+                           // user in the user arraylist
     
     int menu_code;
     boolean running;
