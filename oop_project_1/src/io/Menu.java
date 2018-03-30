@@ -59,17 +59,17 @@ public class Menu {
                         break;
                 case 1: LoginMenu();
                         break;
-                case 2: //new user
+                case 2: NewUserMenu();
                         break;
                 case 3: MainUserMenu();
                         break;
-                case 4: // forgot password
+                case 4: ForgotPasswordMenu();
                         break;
-                case 5: // shop/item search
+                case 5: ShopMenu();
                         break;
-                case 6: // checkout
+                case 6: CheckoutMenu();
                         break;
-                case 7: // user settings
+                case 7: UserSettingsMenu();
                         break;
                 case 8: AdminMenu();
                         break;
@@ -186,7 +186,7 @@ public class Menu {
     }
     
     // settings
-    public void UserSettings(){
+    public void UserSettingsMenu(){
         
     }
     
