@@ -79,7 +79,7 @@ public class Menu {
     // The logic will be handled here
     
     // main menu
-    public void MainMenu() throws InterruptedException{
+    public void MainMenu() throws InterruptedException{ // 0
         Util.clear();
         Util.println("----- Main -----");
         Util.println("1) Login ");
@@ -136,10 +136,16 @@ public class Menu {
         }
         
     }// end of login
-    
-    // admin menu
-    public void AdminMenu(){ // 8
-        
+   
+     // for adding new user information
+    public void NewUserMenu(){ // 2
+        // get desired user name
+        // - check if available
+        // set password
+        // - enter in password twice to verify
+        // and user to all_users
+        // 
+        // keep this user as the current user too
     }
     
     // normal user menu
@@ -168,20 +174,18 @@ public class Menu {
         }
     }// end of that
     
-    
-    // for adding new user information
-    public void NewUserMenu(){
-        // get desired user name
-        // - check if available
-        // set password
-        // - enter in password twice to verify
-        // and user to all_users
-        // 
-        // keep this user as the current user too
+    // forgot password
+    public void ForgotPasswordMenu(){ // 4
+        // users will enter in their email and if the email mathces their 
+        //  account email they will be emailed a code.
+        // They will then enter in the code to change thier password.
+        // - enter it in twice for verification
+        
+        // then keep user logged in as current user
     }
     
     // shop
-    public void ShopMenu(){
+    public void ShopMenu(){ // 5
         // shop will have a few things..
         // - Search for items
         //   - by name
@@ -193,30 +197,8 @@ public class Menu {
         // once they are done they will go to the checkout menu.
     }
     
-    
-    // forgot password
-    public void ForgotPasswordMenu(){
-        // users will enter in their email and if the email mathces their 
-        //  account email they will be emailed a code.
-        // They will then enter in the code to change thier password.
-        // - enter it in twice for verification
-        
-        // then keep user logged in as current user
-    }
-    
-    // settings
-    public void UserSettingsMenu(){
-        // upgrade to UCLUB member
-        // view history.
-        // cancel orders(maybe)
-        // change password
-        // change username
-        // delete account
-        // - ADMIN cannot be deleted
-    }
-    
     // checkout
-    public void CheckoutMenu(){
+    public void CheckoutMenu(){ // 6
         // will ask user to check out
         // - enter in payment info
         // - verify they want the items
@@ -227,6 +209,26 @@ public class Menu {
         
     }
     
+    // settings
+    public void UserSettingsMenu(){ // 7
+        // upgrade to UCLUB member
+        // view history.
+        // cancel orders(maybe)
+        // change password
+        // change username
+        // delete account
+        // - ADMIN cannot be deleted
+    }
+    
+        // admin menu
+    public void AdminMenu(){ // 8
+        // View user historys
+        // - purchase historys
+        // - activity
+        // View payment stubs
+        // view item invintory
+        
+    }
     
     
 }
