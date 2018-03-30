@@ -27,6 +27,7 @@ public class User {
         this.UserPass = "";
         this.email = "";
         history = new ArrayList<>();
+        cart = new ArrayList<>();
     }
     
     public User(String Name, String Pass){
@@ -62,8 +63,9 @@ public class User {
     }//
     public void add_cart(String i){this.cart.add(i);}
     
+    @Override
     public String toString(){
-        return "UserName : " + this.UserName + " Email : " + this.email;
+        return "UserName : " + this.UserName + " "+ this.UserPass +  " Email : " + this.email;
     }
     // exception handling later
     

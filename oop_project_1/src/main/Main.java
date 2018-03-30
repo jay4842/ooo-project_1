@@ -31,7 +31,7 @@ public class Main {
     
     
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // TODO code application logic here
     
         // testing the classes before adding the UI component

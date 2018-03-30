@@ -51,8 +51,9 @@ public class Menu {
         in = new Input();
     }
     /////////
-    public void run_menu(){
+    public void run_menu() throws InterruptedException{
         while(this.running){
+            Thread.sleep(100); // wait for user input
             switch(this.menu_code){
                 case 0: MainMenu();
                         break;
@@ -78,16 +79,28 @@ public class Menu {
     // The logic will be handled here
     
     // main menu
-    public void MainMenu(){
+    public void MainMenu() throws InterruptedException{
         Util.clear();
         Util.println("----- Main -----");
         Util.println("1) Login ");
         Util.println("2) New User ");
         Util.println("3) Exit ");
+        
+        int choice = in.IntPrompt("-> ");
+        if(choice == 1){
+            this.menu_code = 1;
+            return;
+        }
+        if(choice == 3){
+            // EXIT program
+            Util.clear();
+            this.running = false;
+            Util.println("Goodbye");
+        }
     }
     
     // login menu
-    public void LoginMenu(){
+    public void LoginMenu() throws InterruptedException{ // 1
         Util.clear();
         String uName = in.StringPrompt("User Name     ->");
         String uPass = in.StringPrompt("User Password ->");
@@ -97,7 +110,7 @@ public class Menu {
         //  - notify user the password does not match
         //  - give option to forgot password
         //    - to change password enter in the email address attachted to the user.
-        int pos = this.userManager.checkUsername(uPass);
+        int pos = this.userManager.checkUsername(uName);
         if(pos == -1){
             // user not found
             Util.println("The UserName entered was not found!");
@@ -138,11 +151,48 @@ public class Menu {
         Util.clear();
         Util.println("----- User Menu -----");
         Util.println("1) Shop ");
-        Util.println("2) Checkout cart < " + this.CurrentUser.getcart().size() + " >");
+        Util.println("2) Checkout < cart " + this.CurrentUser.getcart().size() + " >");
         Util.println("3) User Settings ");
         Util.println("4) Logout ");
         
+        int choice = in.IntPrompt("-> ");
+        
+        if(choice == 4){
+            // return to main menu
+            Util.clear();
+            this.menu_code = 0;
+            Util.println("Goodbye " + this.CurrentUser.get_userName());
+            this.currentUser_index = -1;
+            return;
+            
+        }
+    }// end of that
     
+    
+    // for adding new user information
+    public void NewUserMenu(){
+        
+    }
+    
+    // shop
+    public void ShopMenu(){
+        
+    }
+    
+    
+    // forgot password
+    public void ForgotPasswordMenu(){
+        
+    }
+    
+    // settings
+    public void UserSettings(){
+        
+    }
+    
+    // checkout
+    public void CheckoutMenu(){
+        
     }
     
     

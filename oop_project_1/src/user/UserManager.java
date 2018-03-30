@@ -113,6 +113,7 @@ public class UserManager {
    // return the position of the user for future user
    public int checkUsername(String s){
        for(int i = 0; i < this.all_users.size(); i++){
+          
            if(s.equals(all_users.get(i).get_userName()))
                return i;
        }
@@ -120,7 +121,8 @@ public class UserManager {
    }
    // the check for password
    public boolean login(String s, int pos){
-       if(this.all_users.get(pos).get_userName().equals(s))
+       
+       if(s.equals(this.all_users.get(pos).get_userPass()))
            return true;
        else
            return false;
