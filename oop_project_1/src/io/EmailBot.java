@@ -30,7 +30,7 @@ public class EmailBot {
         String pass = this.email_pass;
         
         Properties props = System.getProperties();
-        String host = "smtp.gmail.com";
+        String host = "smtp.gmail.com"; // gmail host
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.user", from);
