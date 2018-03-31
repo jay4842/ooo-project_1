@@ -36,6 +36,8 @@ import util.Util;
  * 
  * The functions are ordered by menu code, they also have their code 
  * along with the definition.
+ * 
+ * 
  */
 public class Menu {
     UserManager userManager;
@@ -80,6 +82,8 @@ public class Menu {
             }
         }
     }
+    
+    // TODO:: ADD A HELP COMMAND OPTION TO PROVIDE HELP AT ANYTIME.
     // The logic will be handled here
     
     // main menu
@@ -162,7 +166,7 @@ public class Menu {
         String uName = in.StringPrompt("Desired userName -> ");
         if(this.userManager.checkUsername(uName) != -1){
             // the user name is already taken
-            in.keyStroakPrompt("That user name is alread taken.\n[Enter]");
+            in.keyStroakPrompt("That user name is already taken.\n[Enter]");
         }else{   
             // set email (Add checking later)
             String uEmail = in.StringPrompt("Enter email address linked to account -> ");
@@ -232,11 +236,45 @@ public class Menu {
         //   - by name
         //   - by catagory
         //   - by price
+        int shop_code = 0; // we will use some sub menus here
+        Util.clear();
+        Util.println("---------- Shop ----------");
+        Util.println("1) Search by item type");
+        Util.println("2) Search by name");
+        Util.println("3) Search by price");
+        Util.println("4) Checkout < cart " + this.CurrentUser.getcart().size() + " >");
+        Util.println("5) Return ");
         
+        int choice = in.IntPrompt("-> ");
+        switch(choice){
+            case 1: type_search();
+                    break;
+            case 2: name_search();
+                    break;
+            case 3: price_search();
+                    break;
+            case 4: CheckoutMenu();
+                    break;
+            case 5: this.menu_code = 3;
+                    break;
+        }
         // shopping will allow users to view a list of items.
         // they will then be able add items to their cart.
         // once they are done they will go to the checkout menu.
     }
+    
+    // shop sub menus
+    private void type_search(){
+        
+    }
+    private void name_search(){
+        
+    }
+    private void price_search(){
+        
+    }
+    
+    // end of shop sub menus // 
     
     // checkout
     public void CheckoutMenu(){ // 6

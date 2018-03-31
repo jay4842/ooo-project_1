@@ -5,6 +5,10 @@
  */
 package io;
 
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+
 /**
  *
  * @author Jimmy
@@ -16,12 +20,53 @@ public class EmailBot {
     String email_pass;
     
     public EmailBot(){ // will use the bina-bot I already have created
-        this.email = "";
-        this.email_pass = "";
+        this.email = "binabotboy@gmail.com";
+        this.email_pass = "bubbleBotFive";
     }
     
-    public void sendEmail(String reciver, String msg){
-        // logic here
+    // Function from https://stackoverflow.com/questions/46663/how-can-i-send-an-email-by-java-application-using-gmail-yahoo-or-hotmail
+    public void sendFromGMail(String[] to, String subject, String body) {
+        String from = this.email;
+        String pass = this.email_pass;
+        
+        Properties props = System.getProperties();
+        String host = "smtp.gmail.com";
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.user", from);
+        props.put("mail.smtp.password", pass);
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+
+        Session session = Session.getDefaultInstance(props);
+        MimeMessage message = new MimeMessage(session);
+
+        try {
+            message.setFrom(new InternetAddress(from));
+            InternetAddress[] toAddress = new InternetAddress[to.length];
+
+            // To get the array of addresses
+            for( int i = 0; i < to.length; i++ ) {
+                toAddress[i] = new InternetAddress(to[i]);
+            }
+
+            for( int i = 0; i < toAddress.length; i++) {
+                message.addRecipient(Message.RecipientType.TO, toAddress[i]);
+            }
+
+            message.setSubject(subject);
+            message.setText(body);
+            Transport transport = session.getTransport("smtp");
+            transport.connect(host, from, pass);
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+        }
+        catch (AddressException ae) {
+            ae.printStackTrace();
+        }
+        catch (MessagingException me) {
+            me.printStackTrace();
+        }
     }
     
 }

@@ -54,7 +54,7 @@ public class UserManager {
         // go through the array to get all the maps
         while(itr.hasNext()){
              JSONObject in = (JSONObject)itr.next();
-             JSONArray hist;
+             JSONArray hist,cart;
              
              User temp = new User();
              
@@ -62,11 +62,24 @@ public class UserManager {
              try{ // the history might be empty!
                 hist = (JSONArray)jo.get("History");
                 for(int i = 0; i < hist.size(); i++){
-                 String s = hist.get(i).toString();
-                 temp.add_history(s);
-             }
+                    String s = hist.get(i).toString();
+                    temp.add_history(s);
+                }//hist end
+                
+                
              }catch(Exception e){
                  // if we get here, there was a null value for history
+             }
+             // They need to be seperate to ensure they both try to run
+             try{
+                 cart = (JSONArray)jo.get("Cart");
+                 // cart start
+                for(int i = 0; i < cart.size(); i++){
+                    String s = cart.get(i).toString();
+                    temp.add_cart(s);
+                }
+             }catch(Exception e){
+                 // if we get here, there was a null value for cart
              }
              
              //(double p, String i, String t, String n, String d)
@@ -81,25 +94,38 @@ public class UserManager {
    
    // write the all_users info to the users.json file
    public void saveUsers(){
+       JSONObject users = new JSONObject();
        JSONArray list = new JSONArray();
        // go through all the users and add them to the list
        for(int i = 0; i < all_users.size(); i++){
            JSONObject obj = new JSONObject();
            JSONArray hist = new JSONArray();
-           obj.put("userName", all_users.get(i).get_userName());
-           obj.put("userName", all_users.get(i).get_userPass());
+           JSONArray cart = new JSONArray();
+           obj.put("UserName", all_users.get(i).get_userName());
+           obj.put("UserPass", all_users.get(i).get_userPass());
+           obj.put("Email",all_users.get(i).get_userEmail());
+           
            for(int x = 0; x < all_users.get(i).get_history().size(); x++){
                hist.add(all_users.get(i).get_history().get(x));
            }// end of for
            obj.put("History", hist);
+           
+            for(int x = 0; x < all_users.get(i).getcart().size(); x++){
+               cart.add(all_users.get(i).getcart().get(x));
+           }// end of for
+           obj.put("Cart", cart);
+           
            list.add(obj);
+           
        }// end of for
-       
+       users.put("Users", list);
        // now write the file!
+       
        try (FileWriter file = new FileWriter("src/res/users.json")) {
 
-            file.write(list.toJSONString());
+            file.write(users.toJSONString());
             file.flush();
+            file.close();
 
         } catch (IOException e) {
             e.printStackTrace();
