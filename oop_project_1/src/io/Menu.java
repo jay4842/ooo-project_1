@@ -11,6 +11,8 @@ import data.Inventory;
 import data.Item;
 import util.Util;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Jimmy
@@ -373,9 +375,54 @@ public class Menu {
     }
     private void name_search(){
         // addded a helper in the iventory to help this search
+         boolean searching = true;
+        int item_choice = -1;
+        do{ // incase they want to add multiple items to the cart, or view multiple items
+            int [] item_idxs = new int[0]; // empty
+            Util.clear();
+            Util.println("---------- Search by Name ----------");
+            Util.println("Enter a keyword.\nExample: -> Table");
+            
+            String key = in.StringPrompt(" -> ");
+            if(key.equals("return") || key.equals("exit") || key.equals("end")){
+                searching = false;
+                return;
+            }
+            
+            ArrayList<Item> items_found = this.inv.display_items_by_name(key);
+            
+            if(items_found.size() > 0){
+                // select an item
+                item_choice = in.IntPrompt("Select an item -> ");
+                item_choice -= 1;
+                try{
+                    Util.clear(); // display item in depth
+                    Util.println("---------------------------------------");
+                    Util.println(items_found.get(item_choice).get_item_name());
+                    Util.println("" + items_found.get(item_choice).get_price());
+                    Util.println(items_found.get(item_choice).get_item_desc());
+                    Util.println("\n---------------------------------------");
+                    Util.println("1) add to cart"); // see if they want to get the item
+                    Util.println("2) return ");
+                    int sub_choice = in.IntPrompt("-> ");
+                    
+                    switch(sub_choice){
+                        case 1: // add the item
+                            this.CurrentUser.add_cart(items_found.get(item_choice).get_item_id());
+                            break;
+                        case 2: // return
+                            break;
+                    }
+                }catch(Exception e){
+                    // error occured
+                    //e.printStackTrace(); // uncomment to produce in depth error
+                    in.keyStroakPrompt(key + " [" + item_choice + "] There was a problem processing your choice. [Enter]");
+                }
+            }
+        }while(searching);
     }
     private void price_search(){
-        
+        //
     } 
     // end of shop sub menus // 
     

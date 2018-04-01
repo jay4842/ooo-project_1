@@ -143,10 +143,11 @@ public class Inventory {
     }
     
     public ArrayList<Item> display_items_by_name(String name){
+        name = name.toLowerCase();
         ArrayList<Item> temp = new ArrayList<>();
         for(int i = 0; i < this.database.size(); i++){
             for(int j = 0; j < this.database.get(keys.get(i)).size(); j++){
-                if(this.database.get(keys.get(i)).get(j).get_item_name().contains(name)){
+                if(this.database.get(keys.get(i)).get(j).get_item_name().toLowerCase().contains(name)){ // change things to lowercase to make finding things easier
                     temp.add(this.database.get(keys.get(i)).get(j));
                 }
             }
@@ -159,5 +160,14 @@ public class Inventory {
         
         return temp;
     }
+    
+    // Find item by item_ID
+    public int find_by_id(String id){
+        
+        return -1;
+    }
+
     // exception handling later
+    
+   
 }
