@@ -18,7 +18,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.Util;
-
+import io.Input;
 
 /**
  *
@@ -26,8 +26,9 @@ import util.Util;
  */
 public class UserManager {
    ArrayList<User> all_users; // just using a list of users for now.
-   
+   Input in;
    public UserManager(){
+       in = new Input();
        all_users = new ArrayList<>();
        try {
            // load user json file
@@ -36,10 +37,12 @@ public class UserManager {
            Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
        }
        
+       in.keyStroakPrompt("->");
+       
    }
    
    // open the users.json file to populate the all_users arraylist
-   public void loadUsers() throws Exception{
+   public final void loadUsers() throws Exception{
         Object obj = new JSONParser().parse(new FileReader("src/res/users.json"));
         
         // typecasting obj to JSONObject

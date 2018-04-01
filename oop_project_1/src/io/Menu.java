@@ -11,7 +11,6 @@ import data.Inventory;
 import data.Item;
 import util.Util;
 
-
 /**
  *
  * @author Jimmy
@@ -48,13 +47,22 @@ public class Menu {
     int menu_code;
     boolean running;
     Input in;
+    Inventory inv;
     
     public Menu(){
         this.userManager = new UserManager();
         this.CurrentUser = new User();
         this.menu_code = 0; // login screen
         this.running = true;
-        in = new Input();
+        this.in = new Input();
+        this.inv = new Inventory();
+        
+        try{
+            inv.populate_data(); // try populating our inventory data
+        }catch (Exception e){
+            System.out.println("ERROR: " + e.getMessage());
+        }
+        
     }
     /////////
     public void run_menu() throws InterruptedException{
@@ -127,7 +135,7 @@ public class Menu {
         int pos = this.userManager.checkUsername(uName);
         if(pos == -1){
             // user not found
-            Util.println("The UserName entered was not found!");
+            in.keyStroakPrompt("The UserName entered was not found!\n[Enter]");
             
             // prompt user if they want to create a new profile
             
@@ -207,15 +215,21 @@ public class Menu {
         Util.println("4) Logout ");
         
         int choice = in.IntPrompt("-> "); 
-        
-        if(choice == 4){
-            // return to main menu
-            Util.clear();
-            this.menu_code = 0;
-            Util.println("Goodbye " + this.CurrentUser.get_userName());
-            this.currentUser_index = -1;
-            return;
-            
+        switch(choice){
+            case 1: ShopMenu();
+                    break;
+            case 2: CheckoutMenu();
+                    break;
+            case 3: UserSettingsMenu();
+                    break;
+            case 4:{
+                    Util.clear();
+                    this.menu_code = 0;
+                    Util.println("Goodbye " + this.CurrentUser.get_userName());
+                    this.currentUser_index = -1;
+                    break;
+            }
+                    
         }
     }// end of that
     
@@ -265,15 +279,104 @@ public class Menu {
     
     // shop sub menus
     private void type_search(){
-        
+        boolean searching = true;
+        int item_choice = -1;
+        do{ // incase they want to add multiple items to the cart, or view multiple items
+            int [] item_idxs = new int[0]; // empty
+            Util.clear();
+            Util.println("---------- Search by Type ----------");
+            Util.println("Enter a type of item.\nExample: -> Rug");
+            String type = in.StringPrompt(" -> ");
+            type = type.toLowerCase(); // convert to lower case for simplicity 
+
+            // have to use if statemet ;~;
+            if(type.equals("return") || type.equals("exit") || type.equals("end"))
+                return;
+
+            else if(type.equals("rug") || type.equals("mat")){ // rug check
+                // show rugs
+                type = "Rug";
+                item_idxs = this.inv.display_items_by_type(type);
+
+            }
+            else if(type.equals("furniture")){ // not many synonyms for this 
+                // show
+                type = "Furniture";
+                item_idxs = this.inv.display_items_by_type(type);
+
+            }
+            // decor
+            else if(type.equals("decor") || type.equals("ornimation") || type.equals("decoration")){
+                type = "Decor";
+                item_idxs = this.inv.display_items_by_type(type);
+            }
+            //kitchen
+            else if(type.equals("kitchen") || type.equals("cooking")){
+                type = "Kitchen";
+                item_idxs = this.inv.display_items_by_type(type);
+            }
+            //bed and bath
+            else if(type.equals("bed") || type.equals("bath") 
+                    || type.equals("bath and bath") || type.equals("bed & bath")
+                     || type.equals("bed&bath")){
+                type = "Bed & Bath";
+                item_idxs = this.inv.display_items_by_type(type);
+            }
+            // home improvement
+            else if(type.equals("tools") || type.equals("home improvement")){
+                type = "Home Improvement";
+                item_idxs = this.inv.display_items_by_type(type);
+
+            }
+            //Outdoor
+            else if(type.equals("outdoors") || type.equals("outside") || type.equals("outdoor")){ 
+                // show
+                type = "Outdoor";
+                item_idxs = this.inv.display_items_by_type(type);
+                
+
+            }
+            // end of display setup
+            if(item_idxs.length > 0){
+                item_choice = in.IntPrompt("Select an item -> ");
+                item_choice -= 1;
+                 try{
+                    Util.clear(); // display item in depth
+                    Util.println("---------------------------------------");
+                    Util.println(this.inv.get_database().get(type).get(item_choice).get_item_name());
+                    Util.println("" + this.inv.get_database().get(type).get(item_choice).get_price());
+                    Util.println(this.inv.get_database().get(type).get(item_choice).get_item_desc());
+                    Util.println("\n---------------------------------------");
+                    Util.println("1) add to cart"); // see if they want to get the item
+                    Util.println("2) return ");
+                    int sub_choice = in.IntPrompt("-> ");
+                    
+                    switch(sub_choice){
+                        case 1: // add the item
+                            this.CurrentUser.add_cart(this.inv.get_database().get(type).get(item_choice).get_item_id());
+                            break;
+                        case 2: // return
+                            break;
+                    }
+                }catch(Exception e){
+                    // error occured
+                    //e.printStackTrace(); // uncomment to produce in depth error
+                    in.keyStroakPrompt(type + " [" + item_choice + "] There was a problem processing your choice. [Enter]");
+                }
+            }else{
+                in.keyStroakPrompt("There was nothing found ;~;\n[Enter]");
+            }
+            // take in input
+           
+
+        }while(searching);
     }
     private void name_search(){
-        
+        // addded a helper in the iventory to help this search
     }
     private void price_search(){
         
-    }
-    
+    } 
     // end of shop sub menus // 
     
     // checkout

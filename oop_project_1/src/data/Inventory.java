@@ -6,7 +6,7 @@
 package data;
 
 import util.*;
-
+import io.Input;
 
 import java.io.FileReader;
 import java.util.Iterator;
@@ -27,8 +27,8 @@ public class Inventory {
     
     // how should all the data be held?
     //  Split them up by type
-    
-
+    Input in = new Input();
+    ArrayList<String> keys = new ArrayList<>();
     HashMap<String, ArrayList<Item>> database = new HashMap<String, ArrayList<Item>>();
     
     ArrayList<Item> Furniture = new ArrayList<>();
@@ -41,15 +41,30 @@ public class Inventory {
     
     public Inventory(){
         database.put("Furniture", Furniture);
+        keys.add("Furniture");
+        
         database.put("Kitchen", Kitchen);
+        keys.add("Kitchen");
+        
         database.put("Decor", Decor);
+        keys.add("Decor");
+        
         database.put("Bed & Bath", BedBath);
+        keys.add("Bed & Bath");
+        
         database.put("Home Improvement", HomeImprovement);
+        keys.add("Home Improvement");
+        
         database.put("Outdoor",Outdoor);
+        keys.add("Outdoor");
+        
         database.put("Rug",Rug);
+        keys.add("Rug");
+        
         // done putting in all the boys in the hashtable
     }
     public void populate_data()throws Exception{
+        
         // load the text file and populate our data based on that
     
         // a json will have an items object first
@@ -88,17 +103,61 @@ public class Inventory {
                      in.get("Type").toString(),
                      in.get("Name").toString(),
                      in.get("Des").toString());
-             //Util.println(temp.toString());
+             Util.println(temp.toString());
              
              // now add by type
              String type = temp.get_type();
              database.get(type).add(temp);
              
         }
+        in.keyStroakPrompt("->");
+        
     }
+    
+    // Add a save function
     
     //
     public HashMap<String, ArrayList<Item>> get_database(){return this.database;}
     
+    
+    // helpers to assist the shop menu
+    public int[] display_items_by_type(String type){
+        // returns indicies of items at that key
+        ArrayList<Integer> temp = new ArrayList<>();
+        for(int i = 0; i < this.database.get(type).size(); i++){
+            temp.add(i);// add an index
+            
+            // display the item info (name and price)
+            Util.println("["+(i+1) + "] " + this.database.get(type).get(i).get_item_name());
+            Util.println("    " + this.database.get(type).get(i).get_price());
+        }
+        
+        // assign the boys
+        int[] out = new int[temp.size()];
+        for(int i = 0; i < out.length; i++){
+            out[i] = temp.get(i);
+        }
+        
+        return out;
+        
+    }
+    
+    public ArrayList<Item> display_items_by_name(String name){
+        ArrayList<Item> temp = new ArrayList<>();
+        for(int i = 0; i < this.database.size(); i++){
+            for(int j = 0; j < this.database.get(keys.get(i)).size(); j++){
+                if(this.database.get(keys.get(i)).get(j).get_item_name().contains(name)){
+                    temp.add(this.database.get(keys.get(i)).get(j));
+                }
+            }
+        } // done checking to see if desired string is there
+        // display the items found
+        for(int i = 0; i < temp.size(); i++){
+             Util.println("["+(i+1) + "] " + temp.get(i).get_item_name());
+            Util.println("    " + temp.get(i).get_price());
+        }
+        
+        return temp;
+    }
     // exception handling later
 }

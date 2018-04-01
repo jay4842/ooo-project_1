@@ -29,4 +29,12 @@ import util.Util;
  */
 public class InvoiceManager {
     ArrayList<Invoice> all_invoices;
+    
+    // load invoices
+    
+    // save invoices
+    
+    // get/setters?
+    
+    // some other system helpers
 }
