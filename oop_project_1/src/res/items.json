@@ -52,7 +52,26 @@
             "Type"  : "Outdoor",
             "Name"  : "Rambler's Peak Dry Bag - Reliable 10L Waterproof Bag Great For Fishing, Kayaking, Camping, Beach, Boating, Hiking, Snowboarding and More - Heavy Duty Dry Sack Built to Last",
             "Des"   : "Made of 500D PVC non-rip material, with careful and deliberate heavy-duty construction, fusion welded seams, and reinforced vinyl at stress points. This bag is perfect for storing all your lightweight essentials under any conditions. The bag features a removable, reinforced shoulder strap for convenience. Whether you're going for a day on the beach or hitting some Category V rapids, we've got you covered."
-	}
+	},
+        {
+            "QTY"   : "25",
+            "ID"    : "D1006",
+            "Price" : 19.99,
+            "Type"  : "Decor",
+            "Name"  : "Potted Artificial Mini Succulent Plants, Set of 3",
+            "Des"   : "Brighten up your home or office with these artificial succulent plants. The small size of the potted plants in this set of 3 makes them ideal for any space, from a windowsill in your kitchen to the counter in your bathroom to a corner of your office desk. The dark brown ceramic pots fit in beautifully with any décor, and the striking, distinctive shapes of these artificial plants make them ideal decorative accents and conversation pieces. For lots of decorative flair with no water or maintenance, this set of 3 artificial succulents is the perfect choice."
+        
+        },
+        {
+            "QTY"   : "100",
+            "ID"    : "D1007",
+            "Price" : 19.99,
+            "Type"  : "Decor",
+            "Name"  : "InnoGear 300ml Aromatherapy Essential Oil Diffuser Cool Mist Humidifier Waterless Auto Shut-off with 3 Timers and 7 LED Color Changing Lights",
+            "Des"   : "Compared to 500ml diffuser,this product looks adorable with 300ml size and still powerful to last for more than 5 hours. InnoGear 5 in 1 multifunctional aromatherapy diffuser, humidifier, air purifier, ionizer, night light. It helps you discover the transformative, aromatic power of essential oils, improves air quality and prevents damage from second hand smoke and stale air, works as a humidifier to improve the quality of air and makes breathing easy, functions as an ionizer by releasing negative ions into the air, helps to lift your mood and relieve stress. "
+        }
+        
+        
         
     ]
 }

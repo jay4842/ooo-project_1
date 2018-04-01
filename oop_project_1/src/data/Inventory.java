@@ -129,7 +129,7 @@ public class Inventory {
             
             // display the item info (name and price)
             Util.println("["+(i+1) + "] " + this.database.get(type).get(i).get_item_name());
-            Util.println("    " + this.database.get(type).get(i).get_price());
+            Util.println("    " + Util.dollar_format(this.database.get(type).get(i).get_price()));
         }
         
         // assign the boys
@@ -155,16 +155,76 @@ public class Inventory {
         // display the items found
         for(int i = 0; i < temp.size(); i++){
              Util.println("["+(i+1) + "] " + temp.get(i).get_item_name());
-            Util.println("    " + temp.get(i).get_price());
+            Util.println("    " + Util.dollar_format(temp.get(i).get_price()));
         }
         
         return temp;
     }
     
+    // show items by price, ex: items 10 and under
+    public ArrayList<Item> display_items_by_price(double price){
+         ArrayList<Item> temp = new ArrayList<>();
+        for(int i = 0; i < this.database.size(); i++){
+            for(int j = 0; j < this.database.get(keys.get(i)).size(); j++){
+                if(this.database.get(keys.get(i)).get(j).get_price() <= price)
+                    temp.add(this.database.get(keys.get(i)).get(j));
+            }
+        }
+        // display
+        for(int i = 0; i < temp.size(); i++){
+             Util.println("["+(i+1) + "] " + temp.get(i).get_item_name());
+            Util.println("    " + Util.dollar_format(temp.get(i).get_price()));
+        }
+        
+        return temp;
+    }// end
+    
     // Find item by item_ID
     public int find_by_id(String id){
+        // first use the firt leter of the id to identify the key
+        //  each key starts with the first letter of the ID.
+        String key = "";
+        for(String k : keys){
+            if(k.charAt(0) == id.charAt(0)){
+                key = k;
+                break;
+            }
+        }// if the key is still "" return -1
+        if(key.equals("")) return -1;
+        for(int j = 0; j < this.database.get(key).size(); j++){
+            if(this.database.get(key).get(j).get_item_id().equals(id))
+                return j;
+        }
+        
         
         return -1;
+    }
+    
+    // reduce qty by finding item by id
+    public void reduce_item(String id,int qty){
+        // first use the firt leter of the id to identify the key
+        //  each key starts with the first letter of the ID.
+        String key = "";
+        for(String k : keys){
+            if(k.charAt(0) == id.charAt(0)){
+                key = k;
+                break;
+            }
+        }// if the key is still "" return -1
+        if(key.equals("")){
+            in.keyStroakPrompt("The item was not found [Enter]");// debugging only
+            
+        }else{
+            for(int j = 0; j < this.database.get(key).size(); j++){
+                // deduct
+                if(this.database.get(key).get(j).get_item_id().equals(id)){
+                    this.database.get(key).get(j).reduce_qty(qty);
+                }
+                // later will add the feature to purchase multiple qtys of an item
+            }
+        }//
+        
+        //done
     }
 
     // exception handling later

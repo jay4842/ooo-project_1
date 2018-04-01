@@ -282,6 +282,8 @@ public class Menu {
     // shop sub menus
     private void type_search(){
         boolean searching = true;
+        boolean done = false;
+        
         int item_choice = -1;
         do{ // incase they want to add multiple items to the cart, or view multiple items
             int [] item_idxs = new int[0]; // empty
@@ -290,93 +292,112 @@ public class Menu {
             Util.println("Enter a type of item.\nExample: -> Rug");
             String type = in.StringPrompt(" -> ");
             type = type.toLowerCase(); // convert to lower case for simplicity 
-
-            // have to use if statemet ;~;
-            if(type.equals("return") || type.equals("exit") || type.equals("end"))
-                return;
-
-            else if(type.equals("rug") || type.equals("mat")){ // rug check
-                // show rugs
-                type = "Rug";
-                item_idxs = this.inv.display_items_by_type(type);
-
-            }
-            else if(type.equals("furniture")){ // not many synonyms for this 
-                // show
-                type = "Furniture";
-                item_idxs = this.inv.display_items_by_type(type);
-
-            }
-            // decor
-            else if(type.equals("decor") || type.equals("ornimation") || type.equals("decoration")){
-                type = "Decor";
-                item_idxs = this.inv.display_items_by_type(type);
-            }
-            //kitchen
-            else if(type.equals("kitchen") || type.equals("cooking")){
-                type = "Kitchen";
-                item_idxs = this.inv.display_items_by_type(type);
-            }
-            //bed and bath
-            else if(type.equals("bed") || type.equals("bath") 
-                    || type.equals("bath and bath") || type.equals("bed & bath")
-                     || type.equals("bed&bath")){
-                type = "Bed & Bath";
-                item_idxs = this.inv.display_items_by_type(type);
-            }
-            // home improvement
-            else if(type.equals("tools") || type.equals("home improvement")){
-                type = "Home Improvement";
-                item_idxs = this.inv.display_items_by_type(type);
-
-            }
-            //Outdoor
-            else if(type.equals("outdoors") || type.equals("outside") || type.equals("outdoor")){ 
-                // show
-                type = "Outdoor";
-                item_idxs = this.inv.display_items_by_type(type);
-                
-
-            }
-            // end of display setup
-            if(item_idxs.length > 0){
-                item_choice = in.IntPrompt("Select an item -> ");
-                item_choice -= 1;
-                 try{
-                    Util.clear(); // display item in depth
-                    Util.println("---------------------------------------");
-                    Util.println(this.inv.get_database().get(type).get(item_choice).get_item_name());
-                    Util.println("" + this.inv.get_database().get(type).get(item_choice).get_price());
-                    Util.println(this.inv.get_database().get(type).get(item_choice).get_item_desc());
-                    Util.println("\n---------------------------------------");
-                    Util.println("1) add to cart"); // see if they want to get the item
-                    Util.println("2) return ");
-                    int sub_choice = in.IntPrompt("-> ");
+            
+            do{
+                Util.clear();
+                // have to use if statemet ;~;
+                if(type.equals("return") || type.equals("exit") || type.equals("end")){
+                    //done = true;
+                    return;
                     
-                    switch(sub_choice){
-                        case 1: // add the item
-                            this.CurrentUser.add_cart(this.inv.get_database().get(type).get(item_choice).get_item_id());
-                            break;
-                        case 2: // return
-                            break;
-                    }
-                }catch(Exception e){
-                    // error occured
-                    //e.printStackTrace(); // uncomment to produce in depth error
-                    in.keyStroakPrompt(type + " [" + item_choice + "] There was a problem processing your choice. [Enter]");
                 }
-            }else{
-                in.keyStroakPrompt("There was nothing found ;~;\n[Enter]");
-            }
-            // take in input
-           
+                else{ // 
+                    if(type.equals("rug") || type.equals("mat") || type.equals("Rug")){ // rug check
+                        // show rugs
+                        type = "Rug";
+                        item_idxs = this.inv.display_items_by_type(type);
+
+                    }
+                    else if(type.equals("furniture") || type.equals("Furniture")){ // not many synonyms for this 
+                        // show
+                        type = "Furniture";
+                        item_idxs = this.inv.display_items_by_type(type);
+
+                    }
+                    // decor
+                    else if(type.equals("decor") || type.equals("ornimation") || type.equals("decoration") || type.equals("Decor")){
+                        type = "Decor";
+                        item_idxs = this.inv.display_items_by_type(type);
+                    }
+                    //kitchen
+                    else if(type.equals("kitchen") || type.equals("cooking") || type.equals("Kitchen")){
+                        type = "Kitchen";
+                        item_idxs = this.inv.display_items_by_type(type);
+                    }
+                    //bed and bath
+                    else if(type.equals("bed") || type.equals("bath") 
+                            || type.equals("bath and bath") || type.equals("bed & bath")
+                             || type.equals("bed&bath") || type.equals("Bed & Bath")){
+                        type = "Bed & Bath";
+                        item_idxs = this.inv.display_items_by_type(type);
+                    }
+                    // home improvement
+                    else if(type.equals("tools") || type.equals("home improvement") || type.equals("Home Improvement")){
+                        type = "Home Improvement";
+                        item_idxs = this.inv.display_items_by_type(type);
+
+                    }
+                    //Outdoor
+                    else if(type.equals("outdoors") || type.equals("outside") || type.equals("outdoor") || type.equals("Outdoor")){ 
+                        // show
+                        type = "Outdoor";
+                        item_idxs = this.inv.display_items_by_type(type);
+
+
+                    }
+                    // end of display setup
+                    if(item_idxs.length > 0){
+                        String check = in.StringPrompt("Select an item -> ");
+                        if(check.equals("return") || check.equals("exit") || check.equals("end"))
+                             done = true;
+                        else{
+                             Util.clear();
+                            item_choice = Integer.parseInt(check);
+                            item_choice -= 1;
+                            try{
+                                 // display item in depth
+                                Util.println("---------------------------------------");
+                                Util.println(this.inv.get_database().get(type).get(item_choice).get_item_name());
+                                Util.println("" + Util.dollar_format(this.inv.get_database().get(type).get(item_choice).get_price()));
+                                Util.println(this.inv.get_database().get(type).get(item_choice).get_item_desc());
+                                Util.println("\n---------------------------------------");
+                                Util.println("1) add to cart"); // see if they want to get the item
+                                Util.println("2) look at another item ");
+                                Util.println("3) search again ");
+                                int sub_choice = in.IntPrompt("-> ");
+
+                                switch(sub_choice){
+                                    case 1: // add the item
+                                        this.CurrentUser.add_cart(this.inv.get_database().get(type).get(item_choice).get_item_id());
+                                        break;
+                                    case 2: // return
+                                        break;
+                                    case 3: // look at a different item
+                                        done = true;
+                                        break;
+                                }
+                            }catch(Exception e){
+                                // error occured
+                                //e.printStackTrace(); // uncomment to produce in depth error
+                                in.keyStroakPrompt(type + " [" + item_choice + "] There was a problem processing your choice. [Enter]");
+                            }
+                        }
+                    }else{
+                        in.keyStroakPrompt("There was nothing found ;~;\n[Enter]");
+                    
+                    }// this looks a little messy
+                    
+                }
+                // take in input
+            }while(!done);
 
         }while(searching);
     }
     private void name_search(){
         // addded a helper in the iventory to help this search
-         boolean searching = true;
+        boolean searching = true;
         int item_choice = -1;
+        boolean done = false;
         do{ // incase they want to add multiple items to the cart, or view multiple items
             int [] item_idxs = new int[0]; // empty
             Util.clear();
@@ -388,41 +409,116 @@ public class Menu {
                 searching = false;
                 return;
             }
-            
-            ArrayList<Item> items_found = this.inv.display_items_by_name(key);
-            
-            if(items_found.size() > 0){
-                // select an item
-                item_choice = in.IntPrompt("Select an item -> ");
-                item_choice -= 1;
-                try{
-                    Util.clear(); // display item in depth
-                    Util.println("---------------------------------------");
-                    Util.println(items_found.get(item_choice).get_item_name());
-                    Util.println("" + items_found.get(item_choice).get_price());
-                    Util.println(items_found.get(item_choice).get_item_desc());
-                    Util.println("\n---------------------------------------");
-                    Util.println("1) add to cart"); // see if they want to get the item
-                    Util.println("2) return ");
-                    int sub_choice = in.IntPrompt("-> ");
-                    
-                    switch(sub_choice){
-                        case 1: // add the item
-                            this.CurrentUser.add_cart(items_found.get(item_choice).get_item_id());
-                            break;
-                        case 2: // return
-                            break;
+            do{
+                Util.clear();
+                ArrayList<Item> items_found = this.inv.display_items_by_name(key);
+
+                if(items_found.size() > 0){
+                    String check = in.StringPrompt("Select an item -> ");
+                    if(check.equals("return") || check.equals("exit") || check.equals("end"))
+                        done = true;
+                    else{
+                        // select an item
+                        item_choice = Integer.parseInt(check);
+                        item_choice -= 1;
+                        try{
+                             // display item in depth
+                            Util.println("---------------------------------------");
+                            Util.println(items_found.get(item_choice).get_item_name());
+                            Util.println("" + Util.dollar_format(items_found.get(item_choice).get_price()));
+                            Util.println(items_found.get(item_choice).get_item_desc());
+                            Util.println("\n---------------------------------------");
+                            Util.println("1) add to cart "); // see if they want to get the item
+                            Util.println("2) look at another item ");
+                            Util.println("3) search again ");
+                            int sub_choice = in.IntPrompt("-> ");
+
+                            switch(sub_choice){
+                                case 1: // add the item
+                                    this.CurrentUser.add_cart(items_found.get(item_choice).get_item_id());
+                                    break;
+                                case 2: 
+                                    break;
+                                case 3: // return
+                                    done = true;
+                                    break;
+                            }
+                        }catch(Exception e){
+                            // error occured
+                            //e.printStackTrace(); // uncomment to produce in depth error
+                            in.keyStroakPrompt(key + " [" + item_choice + "] There was a problem processing your choice. [Enter]");
+                        }
                     }
-                }catch(Exception e){
-                    // error occured
-                    //e.printStackTrace(); // uncomment to produce in depth error
-                    in.keyStroakPrompt(key + " [" + item_choice + "] There was a problem processing your choice. [Enter]");
                 }
-            }
+            }while(!done);
         }while(searching);
     }
     private void price_search(){
-        //
+        boolean searching = true;
+        int item_choice = -1;
+        boolean done = false;
+        do{ // incase they want to add multiple items to the cart, or view multiple items
+            int [] item_idxs = new int[0]; // empty
+            Util.clear();
+            Util.println("---------- Search by Price ----------");
+            Util.println("Enter a price.\nExample: -> 10.00");
+            String price = in.StringPrompt("-> ");
+            
+            if(price.equals("return") || price.equals("exit") || price.equals("end")){
+                searching = false;
+                return;
+            }
+            
+            if(price.charAt(0) == '$'){
+                price = price.substring(1); // cut it off
+            }
+            do{
+                double d_price = Double.parseDouble(price);
+                Util.clear();
+                ArrayList<Item> items_found = this.inv.display_items_by_price(d_price);
+
+                 if(items_found.size() > 0){
+                    // select an item
+                    Util.clear();
+                    String check = in.StringPrompt("Select an item -> ");
+                    if(check.equals("return") || check.equals("exit") || check.equals("end"))
+                        done = true;
+                    else{
+                        // select an item
+                        item_choice = Integer.parseInt(check);
+                        item_choice -= 1;
+                        try{
+                            // display item in depth
+                            Util.println("---------------------------------------");
+                            Util.println(items_found.get(item_choice).get_item_name());
+                            Util.println("" + Util.dollar_format(items_found.get(item_choice).get_price()));
+                            Util.println(items_found.get(item_choice).get_item_desc());
+                            Util.println("\n---------------------------------------");
+                            Util.println("1) add to cart"); // see if they want to get the item
+                            Util.println("2) look at another item ");
+                            Util.println("3) search again ");
+                            int sub_choice = in.IntPrompt("-> ");
+
+                            switch(sub_choice){
+                                case 1: // add the item
+                                    this.CurrentUser.add_cart(items_found.get(item_choice).get_item_id());
+                                    break;
+                                case 2: 
+                                    break;
+                                case 3: // return
+                                    done = true;
+                                    break;
+                            }
+                        }catch(Exception e){
+                            // error occured
+                            //e.printStackTrace(); // uncomment to produce in depth error
+                            in.keyStroakPrompt(price + " [" + item_choice + "] There was a problem processing your choice. [Enter]");
+                        }
+                    }//
+                }
+            }while(!done);
+             
+        }while(searching);
     } 
     // end of shop sub menus // 
     

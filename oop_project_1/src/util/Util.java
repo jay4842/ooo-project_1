@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package util;
+import java.text.NumberFormat;
 
 /**
  *
@@ -13,6 +14,8 @@ package util;
  * and some other functions as well.
  */
 public class Util {
+    private static final NumberFormat defaultFormat = NumberFormat.getCurrencyInstance();
+    
     public static void println(String s){
         System.out.println(s);
     }
@@ -35,6 +38,10 @@ public class Util {
             //  Handle any exceptions.
             e.printStackTrace();
         }
+    }
+    
+    public static String dollar_format(double d){
+        return defaultFormat.format(d);
     }
     
     

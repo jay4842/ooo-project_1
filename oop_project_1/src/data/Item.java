@@ -45,6 +45,13 @@ public class Item {
     public String get_item_name(){return this.item_name;}
     public String get_item_desc(){return this.item_desc;}
     
+    // setters
+    public void reduce_qty(int q){
+        if(this.qty - q >= 0){
+            this.qty -= q;
+        }
+    }//
+    
     // for outputting
     @Override
     public String toString(){
