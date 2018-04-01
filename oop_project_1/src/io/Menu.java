@@ -8,6 +8,8 @@ package io;
 import user.User;
 import user.UserManager;
 import data.Inventory;
+import data.Invoice;
+import data.InvoiceManager;
 import data.Item;
 import util.Util;
 
@@ -50,10 +52,12 @@ public class Menu {
     boolean running;
     Input in;
     Inventory inv;
+    InvoiceManager invoiceManager;
     
     public Menu(){
         this.userManager = new UserManager();
         this.CurrentUser = new User();
+        this.invoiceManager = new InvoiceManager();
         this.menu_code = 0; // login screen
         this.running = true;
         this.in = new Input();
@@ -220,7 +224,8 @@ public class Menu {
         switch(choice){
             case 1: ShopMenu();
                     break;
-            case 2: CheckoutMenu();
+                    
+            case 2: this.menu_code = 6;
                     break;
             case 3: UserSettingsMenu();
                     break;
@@ -269,7 +274,7 @@ public class Menu {
                     break;
             case 3: price_search();
                     break;
-            case 4: CheckoutMenu();
+            case 4: this.menu_code = 6;
                     break;
             case 5: this.menu_code = 3;
                     break;
@@ -524,13 +529,60 @@ public class Menu {
     
     // checkout
     public void CheckoutMenu(){ // 6
+        // display cart items
+        ArrayList<Item> temp = new ArrayList<>();
+        double total = 0.0;
+        Util.clear();
+        Util.println("------------ Checkout ------------");
+        for(String id : this.CurrentUser.getcart()){
+            Item item = inv.return_by_id(id);
+            temp.add(item);
+            Util.println(item.get_item_name());
+            Util.println(Util.dollar_format(item.get_price()));
+            // add up the total
+            total += item.get_price();
+            
+        }
+        // add tax to the total 
+        double tax = (total * .0825);
+        total += tax;
+        // add the UCLUB stuff here once its implemented //
+        Util.println("tax   - " + Util.dollar_format(tax));
+        Util.println("Total - " + Util.dollar_format(total));
+        Util.println("----------------------------------");
+        Util.println("1) Continue to checkout");
+        Util.println("2) Return to menu ");
+        int choice = in.IntPrompt("-> ");
         // will ask user to check out
-        // - enter in payment info
-        // - verify they want the items
-        // processes cart
-        // - remove items qty
-        // show purchase complete
-        // return to shop menu
+        if(choice == 2){
+            this.menu_code = 3;
+        }
+        else if(choice == 1){
+            Util.clear();
+            // - enter in payment info
+            String card_num  = in.StringPrompt("Enter in your card number -> ");
+            String card_name = in.StringPrompt("Enter full name on card   ->");
+            
+            
+            // processes cart
+            for(String id : this.CurrentUser.getcart()){
+                this.inv.reduce_item(id, 1); // qty is going to be 1 for now
+                // - remove items qty
+            }
+            // now make an invoice and add it to the invoice manager
+            Invoice invoice = new Invoice();
+            invoice.set_Amount(choice);
+            invoice.set_User(this.CurrentUser.get_userName());
+            invoice.set_InvoiceCode("" + this.invoiceManager.get_invoices().size());
+            this.invoiceManager.addInvoice(invoice);
+            // show purchase complete
+            Util.clear();
+            in.keyStroakPrompt("Order Placed!\n[Enter]");
+            
+            this.CurrentUser.getcart().clear(); // clear the users cart
+            // return to shop menu
+            this.menu_code = 3;
+        }
         
     }
     

@@ -172,7 +172,7 @@ public class Inventory {
         }
         // display
         for(int i = 0; i < temp.size(); i++){
-             Util.println("["+(i+1) + "] " + temp.get(i).get_item_name());
+            Util.println("["+(i+1) + "] " + temp.get(i).get_item_name());
             Util.println("    " + Util.dollar_format(temp.get(i).get_price()));
         }
         
@@ -198,6 +198,28 @@ public class Inventory {
         
         
         return -1;
+    }
+    
+    // return item by id
+    public Item return_by_id(String id){
+        // first use the firt leter of the id to identify the key
+        //  each key starts with the first letter of the ID.
+        String key = "";
+        Item temp = new Item();
+        for(String k : keys){
+            if(k.charAt(0) == id.charAt(0)){
+                key = k;
+                break;
+            }
+        }// if the key is still "" return -1
+        if(key.equals("")) return temp;
+        for(int j = 0; j < this.database.get(key).size(); j++){
+            if(this.database.get(key).get(j).get_item_id().equals(id))
+                return this.database.get(key).get(j);
+        }
+        
+        
+        return temp;
     }
     
     // reduce qty by finding item by id
