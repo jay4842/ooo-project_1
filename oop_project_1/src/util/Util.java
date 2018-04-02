@@ -5,7 +5,6 @@
  */
 package util;
 import java.text.NumberFormat;
-import java.util.Random;
 
 /**
  *
@@ -22,8 +21,18 @@ public class Util {
     }
     
     public static void clear(){
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();  
+        try{
+            final String os = System.getProperty("os.name");
+            if(os.contains("Windows")){ // to handle the differnt ways to clear the screen.
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            }else{
+                System.out.print("\033[H\033[2J");  
+                System.out.flush();  
+            }
+        }catch(Exception e){
+            
+        }
+        
     }
     public final static void clearConsole(){
         try{
@@ -44,21 +53,5 @@ public class Util {
     public static String dollar_format(double d){
         return defaultFormat.format(d);
     }
-    
-    public static String generate_string(int length){
-        Random rand = new Random();
-        String out = "";
-        for(int i = 0; i < length; i++){
-            if(rand.nextInt(100) > 50)
-                out += (rand.nextInt(10) + ""); // add a number
-            else{
-                int temp = (rand.nextInt(25));
-                out += (char)(temp + 'a'); // add a letter
-            }
-        }
         
-        return out;
-    }
-    
-    
 }

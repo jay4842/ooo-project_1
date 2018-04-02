@@ -12,6 +12,7 @@ import data.Invoice;
 import data.InvoiceManager;
 import data.Item;
 import util.Util;
+import data.Pass_Reset;
 
 import java.util.ArrayList;
 
@@ -259,7 +260,7 @@ public class Menu {
                 // - enter it in twice for verification
                 EmailBot bot = new EmailBot();
                 // generate random code
-                String code = Util.generate_string(7);
+                String code = Pass_Reset.generate_string(7);
                 // send the code
                 String [] send_to = new String []{userManager.get_allUsers().get(user_index).get_userEmail()};
                 bot.sendFromGMail(send_to, "UberStock Password Recovery Code", code);
@@ -642,23 +643,60 @@ public class Menu {
     // settings
     public void UserSettingsMenu(){ // 7
         // upgrade to UCLUB member
+        Util.clear();
+        Util.println("------ User Settings ------");
+        Util.println("1) UCLUB Membership");
+        Util.println("2) Order History");
+        Util.println("3) Return ");
+        int input = in.IntPrompt("->");
+        switch(input){
+            case 1: uclubSettings();
+                    break;
+            case 2: viewHistory();
+                    break;
+            case 3: this.menu_code = 3;
+                    break;
+        }
         // view history.
-        // cancel orders(maybe)
         // change password
-        // change username
-        // delete account
         // - ADMIN cannot be deleted
+    }
+    private void uclubSettings(){
+        Util.clear();
+        Util.println("------ UCLUB ------");
+        if(this.CurrentUser.isMember()){
+            Util.println("2) Cancel Membership");
+        }else{
+            Util.println("1) Signup");
+        }
+        
+    }
+    
+    private void viewHistory(){
+        
     }
     
         // admin menu
     public void AdminMenu(){ // 8
         // View user historys
-        // - purchase historys
-        // - activity
         // View payment stubs
         // view item invintory
         
     }
+    
+    private void viewUserHistory(){
+        
+    }
+    
+    private void viewInventory(){
+        
+    }
+    
+    private void viewInvoices(){
+        
+    }
+    
+    
     
     
 }
