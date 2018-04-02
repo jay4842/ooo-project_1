@@ -221,30 +221,35 @@ public class Menu {
     // - Logout
     public void MainUserMenu(){ // 3
         Util.clear();
-        Util.println("----- User Menu -----");
-        Util.println("1) Shop ");
-        Util.println("2) Checkout < cart " + this.CurrentUser.getcart().size() + " >");
-        Util.println("3) User Settings ");
-        Util.println("4) Logout ");
-        
-        int choice = in.IntPrompt("-> "); 
-        switch(choice){
-            case 1: ShopMenu();
-                    break;
-                    
-            case 2: this.menu_code = 6;
-                    break;
-            case 3: UserSettingsMenu();
-                    break;
-            case 4:{
-                    Util.clear();
-                    this.menu_code = 0;
-                    Util.println("Goodbye " + this.CurrentUser.get_userName());
-                    this.currentUser_index = -1;
-                    break;
+        if(this.CurrentUser.get_userName().equals("ADMIN")){
+            this.menu_code = 8;
+        }else{
+            Util.println("----- User Menu -----");
+            Util.println("1) Shop ");
+            Util.println("2) Checkout < cart " + this.CurrentUser.getcart().size() + " >");
+            Util.println("3) User Settings ");
+            Util.println("4) Logout ");
+
+            int choice = in.IntPrompt("-> "); 
+            switch(choice){
+                case 1: ShopMenu();
+                        break;
+
+                case 2: this.menu_code = 6;
+                        break;
+                case 3: UserSettingsMenu();
+                        break;
+                case 4:{
+                        Util.clear();
+                        this.menu_code = 0;
+                        Util.println("Goodbye " + this.CurrentUser.get_userName());
+                        this.currentUser_index = -1;
+                        break;
+                }
+
             }
-                    
         }
+       
     }// end of that
     
     // forgot password
@@ -261,7 +266,7 @@ public class Menu {
                 // - enter it in twice for verification
                 EmailBot bot = new EmailBot();
                 // generate random code
-                String code = Pass_Reset.generate_string(7);
+                String code = Pass_Reset.Alpha_Numeric_Symbolic(7);
                 // send the code
                 String [] send_to = new String []{userManager.get_allUsers().get(user_index).get_userEmail()};
                 bot.sendFromGMail(send_to, "UberStock Password Recovery Code", code);
@@ -709,14 +714,15 @@ public class Menu {
             Item temp = this.inv.return_by_id(id);
             Util.println(temp.get_item_name());
             Util.println(Util.dollar_format(temp.get_price()));
-            Util.println(" --------------------------- ");
+            Util.println("------------------------------");
         }
-        Util.println("------------------------------");
         in.keyStroakPrompt("[Enter]");
     }
     
         // admin menu
     public void AdminMenu(){ // 8
+        Util.clear();
+        Util.println("-------- ADMIN --------");
         // View user historys
         // - search user
         // - view all users (except ADMIN)
@@ -743,6 +749,26 @@ public class Menu {
         // To get here a user can type help/assistance or other words similar to help.
         
         // based on the current menu state, help lines will appear to guide a user.
+        switch(this.menu_code){
+                case 0: Util.println("Main Menu Help");
+                        break;
+                case 1: Util.println("Login Menu Help");
+                        break;
+                case 2: Util.println("New User Menu Help");
+                        break;
+                case 3: Util.println("Main User Menu Help");
+                        break;
+                case 4: Util.println("Forgot Password Help");
+                        break;
+                case 5: Util.println("Shop Menu Help");
+                        break;
+                case 6: Util.println("Checkout Menu Help");
+                        break;
+                case 7: Util.println("User Settings Menu Help");
+                        break;
+                case 8: Util.println("ADMIN Menu Help");
+                        break;
+            }
         
     }
     
