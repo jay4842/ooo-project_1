@@ -20,7 +20,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
 /**
- * https://github.com/jay4842/ooo-project_1.git
+ * 
  * @author Jimmy
  */
 public class Inventory {
