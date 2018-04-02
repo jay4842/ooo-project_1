@@ -253,6 +253,8 @@ public class Inventory {
     }
 
     // exception handling later
-    
+    public void save_items(){
+        
+    }
    
 }

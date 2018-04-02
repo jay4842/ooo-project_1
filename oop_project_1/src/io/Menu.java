@@ -148,7 +148,7 @@ public class Menu {
         if(pos == -1){
             // user not found
             in.keyStroakPrompt("The UserName entered was not found!\n[Enter]");
-            
+                this.menu_code = 0;
             // prompt user if they want to create a new profile
             
         }else{
@@ -165,7 +165,8 @@ public class Menu {
                 return; // now were done here
             }
             else{
-                in.keyStroakPrompt("Incorrect Password hit [ENTER] to try again.");
+                in.keyStroakPrompt("Incorrect Password [ENTER]");
+                this.menu_code = 0;
             }
         }
         
@@ -621,6 +622,7 @@ public class Menu {
             // processes cart
             for(String id : this.CurrentUser.getcart()){
                 this.inv.reduce_item(id, 1); // qty is going to be 1 for now
+                this.CurrentUser.add_history(id); // make sure we remember what users purchase
                 // - remove items qty
             }
             // now make an invoice and add it to the invoice manager
@@ -673,16 +675,54 @@ public class Menu {
         
         // input
         int input = in.IntPrompt("-> ");
+        Util.clear();
+        if(input == 1){
+            if(this.CurrentUser.isMember()){
+                Util.println("------- UCLUB -------");
+                String yn = in.StringPrompt("Are you sure you want to cancel your membership?\n (y/n) -> ");
+                if(yn.toLowerCase().equals("y") || yn.toLowerCase().equals("yes")){
+                    Util.clear();
+                    this.CurrentUser.setMember(false);
+                    this.userManager.saveUsers();
+                    in.keyStroakPrompt("[Enter]");
+                    
+                }//
+            }else{
+                Util.println("------- UCLUB -------");
+                Util.println("Total - 19.95");
+                
+                String card_num  = in.StringPrompt("Enter in your card number -> ");
+                String card_name = in.StringPrompt("Enter full name on card   ->");
+                this.CurrentUser.setMember(true);
+                this.userManager.saveUsers();
+                in.keyStroakPrompt("[Enter]");
+                
+            }//
+        }
     }
     
+    // view the history of the user
     private void viewHistory(){
-        
+        Util.clear();
+        Util.println("---------- History -----------");
+        for(String id : this.CurrentUser.get_history()){
+            Item temp = this.inv.return_by_id(id);
+            Util.println(temp.get_item_name());
+            Util.println(Util.dollar_format(temp.get_price()));
+            Util.println(" --------------------------- ");
+        }
+        Util.println("------------------------------");
+        in.keyStroakPrompt("[Enter]");
     }
     
         // admin menu
     public void AdminMenu(){ // 8
         // View user historys
+        // - search user
+        // - view all users (except ADMIN)
         // View payment stubs
+        // - show sums at top 
+        // - stubs after it
         // view item invintory
         
     }
@@ -696,6 +736,13 @@ public class Menu {
     }
     
     private void viewInvoices(){
+        
+    }
+    
+    public void HelpMenu(){ // not a normal menu
+        // To get here a user can type help/assistance or other words similar to help.
+        
+        // based on the current menu state, help lines will appear to guide a user.
         
     }
     

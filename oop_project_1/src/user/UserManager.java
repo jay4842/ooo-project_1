@@ -84,6 +84,16 @@ public class UserManager {
              }catch(Exception e){
                  // if we get here, there was a null value for cart
              }
+             try{
+                  JSONArray ja_hist = (JSONArray)jo.get("History");
+                  for(int i = 0; i < ja_hist.size(); i++){
+                    String s = ja_hist.get(i).toString();
+                    temp.add_history(s); // add the history
+                }
+             }catch(Exception e){
+                 // if we get here, there was a null value for cart
+             }
+             
              try{ // needs to be on its own for now
                  temp.setMember((boolean)jo.get("Member"));
              }catch(Exception e){
