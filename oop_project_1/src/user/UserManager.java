@@ -37,7 +37,7 @@ public class UserManager {
            Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
        }
        
-       in.keyStroakPrompt("->");
+       //in.keyStroakPrompt("->");
        
    }
    
@@ -97,7 +97,7 @@ public class UserManager {
              temp.set_userEmail((String)in.get("Email"));
              
              all_users.add(temp);
-             Util.println(temp.toString());
+             //Util.println(temp.toString());
         }
    }
    

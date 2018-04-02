@@ -103,14 +103,14 @@ public class Inventory {
                      in.get("Type").toString(),
                      in.get("Name").toString(),
                      in.get("Des").toString());
-             Util.println(temp.toString());
+             //Util.println(temp.toString());
              
              // now add by type
              String type = temp.get_type();
              database.get(type).add(temp);
              
         }
-        in.keyStroakPrompt("->");
+        //in.keyStroakPrompt("->");
         
     }
     
@@ -130,6 +130,7 @@ public class Inventory {
             // display the item info (name and price)
             Util.println("["+(i+1) + "] " + this.database.get(type).get(i).get_item_name());
             Util.println("    " + Util.dollar_format(this.database.get(type).get(i).get_price()));
+            Util.println("---------------------------");
         }
         
         // assign the boys
@@ -154,8 +155,9 @@ public class Inventory {
         } // done checking to see if desired string is there
         // display the items found
         for(int i = 0; i < temp.size(); i++){
-             Util.println("["+(i+1) + "] " + temp.get(i).get_item_name());
+            Util.println("["+(i+1) + "] " + temp.get(i).get_item_name());
             Util.println("    " + Util.dollar_format(temp.get(i).get_price()));
+            Util.println("---------------------------");
         }
         
         return temp;
@@ -174,6 +176,7 @@ public class Inventory {
         for(int i = 0; i < temp.size(); i++){
             Util.println("["+(i+1) + "] " + temp.get(i).get_item_name());
             Util.println("    " + Util.dollar_format(temp.get(i).get_price()));
+            Util.println("---------------------------");
         }
         
         return temp;
