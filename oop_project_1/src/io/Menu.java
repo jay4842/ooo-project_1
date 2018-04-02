@@ -665,11 +665,14 @@ public class Menu {
         Util.clear();
         Util.println("------ UCLUB ------");
         if(this.CurrentUser.isMember()){
-            Util.println("2) Cancel Membership");
+            Util.println("1) Cancel Membership");
         }else{
             Util.println("1) Signup");
         }
+        Util.println("2) return");
         
+        // input
+        int input = in.IntPrompt("-> ");
     }
     
     private void viewHistory(){
