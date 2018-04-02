@@ -1,0 +1,57 @@
+
+{
+    "Items" :[
+        {
+            "QTY"   : "10",
+            "ID"    : "F1000",
+            "Price" : 215.0,
+            "Type"  : "Furniture",
+            "Name"  : "Cherry Brown Wooden Table 5 Piece Set",
+            "Des"   : "A counter hight table with four chairs."
+	},
+
+	{
+            "QTY"   : "5",
+            "ID"    : "D1001",
+            "Price" : 25.0,
+            "Type"  : "Decor",
+            "Name"  : "Life Size Penguin Plush",
+            "Des"   : "A penguin plush that is 4 feet tall!"
+	},
+        
+        {
+            "QTY"   : "25",
+            "ID"    : "R1002",
+            "Price" : 34.99,
+            "Type"  : "Rug",
+            "Name"  : "Cotton Craft Jute & Cotton Multi Chindi Braid Rug, Hand Woven Reversible, 4-Feet",
+            "Des"   : "This beautiful and unique rug is hand woven by skilled artisans. Hand made from strips of colorful recycled cotton rags also known as Chindi and eco-friendly Natural Jute yarns. Each rug is unique and different, no two are identical, the result of plying together of hundreds of colorful strips of Cotton Chindi. This will fit in and complement just about any decor. We hope you like and enjoy this rug as much as we have enjoyed making and bringing it for you."
+	},
+        
+        {
+            "QTY"   : "55",
+            "ID"    : "B1003",
+            "Price" : 14.99,
+            "Type"  : "Bed & Bath",
+            "Name"  : "Cotton Washcloth Hand Towels 4 Pieces",
+            "Des"   : " High Quality Cotton: Made with 100% Cotton. Doubled stitched to prevent fraying and promote longevity and durability."
+	},
+        
+        {
+            "QTY"   : "32",
+            "ID"    : "H1004",
+            "Price" : 34.99,
+            "Type"  : "Home Improvement",
+            "Name"  : "Black & Decker BDCDD120C 20V MAX Lithium Single Speed Drill/Driver",
+            "Des"   : "The BLACK+DECKER BDCDD120C 20V MAX* Lithium Single Speed Drill/Driver allows you to hang pictures, shelves and more in a snap with this compact, do-it-all drill/driver. Small and light than most, it fits in tight spaces (with an LED to light your way) while still delivering the power needed to complete most household tasks. The compact design, 35% smaller than the GC1801 Drill/Driver, allows you to fit in tighter spaces (behind appliances, inside cabinets, inside closets, etc.). This tool is lightweight at 2.5 lbs and provides less fatigue and makes it easy to move from room to room. The keyless chuck allows for easy bit changes. An 11-position clutch helps prevent stripping screws or damaging material and an LED light illuminates the project surface. The mid-handle design helps make the drill comfortable to use. Part of the 20V MAX* System - 1 System. Endless Tasks. Power for your Style. Includes: (1) 20V MAX* Battery, (1) Battery Charger, (1) Double Ended Bit."
+	},
+        {
+            "QTY"   : "55",
+            "ID"    : "O1005",
+            "Price" : 10.99,
+            "Type"  : "Outdoor",
+            "Name"  : "Rambler's Peak Dry Bag - Reliable 10L Waterproof Bag Great For Fishing, Kayaking, Camping, Beach, Boating, Hiking, Snowboarding and More - Heavy Duty Dry Sack Built to Last",
+            "Des"   : "Made of 500D PVC non-rip material, with careful and deliberate heavy-duty construction, fusion welded seams, and reinforced vinyl at stress points. This bag is perfect for storing all your lightweight essentials under any conditions. The bag features a removable, reinforced shoulder strap for convenience. Whether you're going for a day on the beach or hitting some Category V rapids, we've got you covered."
+	}
+    ]
+}
