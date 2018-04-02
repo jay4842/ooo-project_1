@@ -21,6 +21,7 @@ public class User {
     String UserName;
     String UserPass; // might add an encryption of some type for now no.
     String email;
+    boolean uClub = false;
     
     public User(){
         this.UserName = "";
@@ -46,12 +47,14 @@ public class User {
         cart = new ArrayList<>();
     }
     
+    public boolean isMember(){return this.uClub;}
     public String get_userName(){return this.UserName;}
     public String get_userPass(){return this.UserPass;}
     public String get_userEmail(){return this.email;}
     public ArrayList<String> get_history(){return this.history;}
     public ArrayList<String> getcart(){return this.cart;}
     
+    public void setMember(boolean b){this.uClub = b;}
     public void set_userName(String s){this.UserName = s;}
     public void set_userPass(String s){this.UserPass = s;}
     public void set_userEmail(String s){this.email = s;}

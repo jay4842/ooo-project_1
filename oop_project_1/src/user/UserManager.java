@@ -84,12 +84,18 @@ public class UserManager {
              }catch(Exception e){
                  // if we get here, there was a null value for cart
              }
+             try{ // needs to be on its own for now
+                 temp.setMember((boolean)jo.get("Member"));
+             }catch(Exception e){
+                 // if we get here, there was a null value for cart
+             }
              
              //(double p, String i, String t, String n, String d)
              
              temp.set_userName((String)in.get("UserName"));
              temp.set_userPass((String)in.get("UserPass"));
              temp.set_userEmail((String)in.get("Email"));
+             
              all_users.add(temp);
              Util.println(temp.toString());
         }
@@ -107,7 +113,7 @@ public class UserManager {
            obj.put("UserName", all_users.get(i).get_userName());
            obj.put("UserPass", all_users.get(i).get_userPass());
            obj.put("Email",all_users.get(i).get_userEmail());
-           
+           obj.put("Member", all_users.get(i).isMember());
            for(int x = 0; x < all_users.get(i).get_history().size(); x++){
                hist.add(all_users.get(i).get_history().get(x));
            }// end of for

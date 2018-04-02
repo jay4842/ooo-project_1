@@ -103,10 +103,11 @@ public class Menu {
     // main menu
     public void MainMenu() throws InterruptedException{ // 0
         Util.clear();
-        Util.println("----- Main -----");
+        Util.println("------- Main -------");
         Util.println("1) Login ");
         Util.println("2) New User ");
-        Util.println("3) Exit ");
+        Util.println("3) Forgot password");
+        Util.println("4) Exit ");
         
         int choice = in.IntPrompt("-> ");
         if(choice == 1){
@@ -118,8 +119,12 @@ public class Menu {
             this.menu_code = 2; // take to the new user setup
             return;
         }
-        //
         if(choice == 3){
+            this.menu_code = 4; // take to the forgot password section 
+            return;
+        }
+        //
+        if(choice == 4){
             // EXIT program
             Util.clear();
             this.running = false;
@@ -242,12 +247,54 @@ public class Menu {
     
     // forgot password
     public void ForgotPasswordMenu(){ // 4
-        // users will enter in their email and if the email mathces their 
-        //  account email they will be emailed a code.
-        // They will then enter in the code to change thier password.
-        // - enter it in twice for verification
+        // users will enter in their email and if the email mathces their
+        Util.clear();
+        String UserName = in.StringPrompt("Enter your User Name\n->");
+        int user_index = userManager.checkUsername(UserName);
+        if( user_index != -1){
+            String in_email = in.StringPrompt("\nEnter the email linked to your account\n->");
+            //  account email they will be emailed a code.
+            if(userManager.get_allUsers().get(user_index).get_userEmail().equals(in_email)){
+                // They will then enter in the code to change thier password.
+                // - enter it in twice for verification
+                EmailBot bot = new EmailBot();
+                // generate random code
+                String code = Util.generate_string(7);
+                // send the code
+                String [] send_to = new String []{userManager.get_allUsers().get(user_index).get_userEmail()};
+                bot.sendFromGMail(send_to, "UberStock Password Recovery Code", code);
+                Util.println("A randomly generated code was sent to your email.");
+                
+                String user_code = in.StringPrompt("Enter the code -> ");
+                if(code.toLowerCase().equals(user_code.toLowerCase())){
+                    // reset password
+                    boolean done = false;
+                    String uPass = "";
+                    do{
+                        Util.clear();
+                        uPass = in.StringPrompt("Create a password  -> ");
+                        // - enter in password twice to verify
+                        String verify = in.StringPrompt("Re-enter password -> ");
+                        if(uPass.equals(verify))
+                            done = true;
+                        else
+                            in.keyStroakPrompt("The passwords did not match, please try again\n[Enter]");
+                    }while(!done);
+                    
+                    userManager.get_allUsers().get(user_index).set_userPass(uPass);
+                    userManager.saveUsers(); // and update the JSON!
+                }
+                // then keep user logged in as current user
+                this.CurrentUser = userManager.get_allUsers().get(user_index);
+                this.menu_code = 3; // take to the main user menu now
+            }
+            
+        }else{
+            in.keyStroakPrompt("That username was not found [Enter]");
+        }
+           
         
-        // then keep user logged in as current user
+        
     }
     
     // shop
@@ -546,9 +593,15 @@ public class Menu {
         // add tax to the total 
         double tax = (total * .0825);
         total += tax;
+        // If they are UCLUB they get the 5% cashback after they purchase the item(s)..
+        //  This cashback will be given
+        if(this.CurrentUser.isMember()){
+            // do the 5% cashback here
+        Util.println("UCLUB 5% - " + Util.dollar_format(total));
+        }
         // add the UCLUB stuff here once its implemented //
-        Util.println("tax   - " + Util.dollar_format(tax));
-        Util.println("Total - " + Util.dollar_format(total));
+        Util.println("tax      - " + Util.dollar_format(tax));
+        Util.println("Total    - " + Util.dollar_format(total));
         Util.println("----------------------------------");
         Util.println("1) Continue to checkout");
         Util.println("2) Return to menu ");
