@@ -161,8 +161,6 @@ public class Menu {
                     this.menu_code = 8;
                 else
                     this.menu_code = 3; // menu switch
-                
-                return; // now were done here
             }
             else{
                 in.keyStroakPrompt("Incorrect Password [ENTER]");
@@ -721,8 +719,6 @@ public class Menu {
     
         // admin menu
     public void AdminMenu(){ // 8
-        Util.clear();
-        Util.println("-------- ADMIN --------");
         // View user historys
         // - search user
         // - view all users (except ADMIN)
@@ -730,7 +726,15 @@ public class Menu {
         // - show sums at top 
         // - stubs after it
         // view item invintory
+        Util.clear();
+        Util.println("-------- ADMIN --------");
+        Util.println("1) View User Historys");
+        Util.println("2) View Invoices");
+        Util.println("3) View Inventory");
+        Util.println("4) Logout");
         
+        int input = in.IntPrompt("->");
+        //switch();
     }
     
     private void viewUserHistory(){
