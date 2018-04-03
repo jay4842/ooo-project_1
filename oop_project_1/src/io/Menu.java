@@ -110,63 +110,67 @@ public class Menu {
         Util.println("3) Forgot password");
         Util.println("4) Exit ");
         
-        int choice = in.IntPrompt("-> ");
-        if(choice == 1){
-            this.menu_code = 1; // take to login screen 
-            return;
-        }
-        //
-        if(choice == 2){
-            this.menu_code = 2; // take to the new user setup
-            return;
-        }
-        if(choice == 3){
-            this.menu_code = 4; // take to the forgot password section 
-            return;
-        }
-        //
-        if(choice == 4){
-            // EXIT program
-            Util.clear();
-            this.running = false;
-            Util.println("Goodbye");
-        }
+        try{
+            int choice = in.IntPrompt("-> ");
+            if(choice == 1){
+                this.menu_code = 1; // take to login screen 
+                return;
+            }
+            //
+            if(choice == 2){
+                this.menu_code = 2; // take to the new user setup
+                return;
+            }
+            if(choice == 3){
+                this.menu_code = 4; // take to the forgot password section 
+                return;
+            }
+            //
+            if(choice == 4){
+                // EXIT program
+                Util.clear();
+                this.running = false;
+                Util.println("Goodbye");
+            }
+        }catch(Exception e){}
     }
     
     // login menu
     public void LoginMenu() throws InterruptedException{ // 1
         Util.clear();
-        String uName = in.StringPrompt("User Name     ->");
-        String uPass = in.StringPrompt("User Password ->");
-        
-        // now check if this user is registered in the system.
-        //  If the user name shows up and the password is wrong:
-        //  - notify user the password does not match
-        //  - give option to forgot password
-        //    - to change password enter in the email address attachted to the user.
-        int pos = this.userManager.checkUsername(uName);
-        if(pos == -1){
-            // user not found
-            in.keyStroakPrompt("The UserName entered was not found!\n[Enter]");
-                this.menu_code = 0;
-            // prompt user if they want to create a new profile
-            
-        }else{
-            // now check if the password was correct
-            if(this.userManager.login(uPass, pos)){
-                this.currentUser_index = pos;
-                this.CurrentUser = this.userManager.get_allUsers().get(pos);
-                
-                if(uName.equals("ADMIN"))
-                    this.menu_code = 8;
-                else
-                    this.menu_code = 3; // menu switch
+        try{
+            String uName = in.StringPrompt("User Name     ->");
+            String uPass = in.StringPrompt("User Password ->");
+
+            // now check if this user is registered in the system.
+            //  If the user name shows up and the password is wrong:
+            //  - notify user the password does not match
+            //  - give option to forgot password
+            //    - to change password enter in the email address attachted to the user.
+            int pos = this.userManager.checkUsername(uName);
+            if(pos == -1){
+                // user not found
+                in.keyStroakPrompt("The UserName entered was not found!\n[Enter]");
+                    this.menu_code = 0;
+                // prompt user if they want to create a new profile
+
+            }else{
+                // now check if the password was correct
+                if(this.userManager.login(uPass, pos)){
+                    this.currentUser_index = pos;
+                    this.CurrentUser = this.userManager.get_allUsers().get(pos);
+
+                    if(uName.equals("ADMIN"))
+                        this.menu_code = 8;
+                    else
+                        this.menu_code = 3; // menu switch
+                }
+                else{
+                    in.keyStroakPrompt("Incorrect Password [ENTER]");
+                    this.menu_code = 0;
+                }
             }
-            else{
-                in.keyStroakPrompt("Incorrect Password [ENTER]");
-                this.menu_code = 0;
-            }
-        }
+        }catch(Exception e){}
         
     }// end of login
    
@@ -227,25 +231,26 @@ public class Menu {
             Util.println("2) Checkout < cart " + this.CurrentUser.getcart().size() + " >");
             Util.println("3) User Settings ");
             Util.println("4) Logout ");
+            try{
+                int choice = in.IntPrompt("-> "); 
+                switch(choice){
+                    case 1: ShopMenu();
+                            break;
 
-            int choice = in.IntPrompt("-> "); 
-            switch(choice){
-                case 1: ShopMenu();
-                        break;
+                    case 2: this.menu_code = 6;
+                            break;
+                    case 3: UserSettingsMenu();
+                            break;
+                    case 4:{
+                            Util.clear();
+                            this.menu_code = 0;
+                            Util.println("Goodbye " + this.CurrentUser.get_userName());
+                            this.currentUser_index = -1;
+                            break;
+                    }
 
-                case 2: this.menu_code = 6;
-                        break;
-                case 3: UserSettingsMenu();
-                        break;
-                case 4:{
-                        Util.clear();
-                        this.menu_code = 0;
-                        Util.println("Goodbye " + this.CurrentUser.get_userName());
-                        this.currentUser_index = -1;
-                        break;
                 }
-
-            }
+            }catch(Exception e){}
         }
        
     }// end of that
@@ -318,19 +323,21 @@ public class Menu {
         Util.println("4) Checkout < cart " + this.CurrentUser.getcart().size() + " >");
         Util.println("5) Return ");
         
-        int choice = in.IntPrompt("-> ");
-        switch(choice){
-            case 1: type_search();
-                    break;
-            case 2: name_search();
-                    break;
-            case 3: price_search();
-                    break;
-            case 4: this.menu_code = 6;
-                    break;
-            case 5: this.menu_code = 3;
-                    break;
-        }
+        try{
+            int choice = in.IntPrompt("-> ");
+            switch(choice){
+                case 1: type_search();
+                        break;
+                case 2: name_search();
+                        break;
+                case 3: price_search();
+                        break;
+                case 4: this.menu_code = 6;
+                        break;
+                case 5: this.menu_code = 3;
+                        break;
+            }
+        }catch(Exception e){}
         // shopping will allow users to view a list of items.
         // they will then be able add items to their cart.
         // once they are done they will go to the checkout menu.
@@ -347,107 +354,116 @@ public class Menu {
             Util.clear();
             Util.println("---------- Search by Type ----------");
             Util.println("Enter a type of item.\nExample: -> Rug");
-            String type = in.StringPrompt(" -> ");
-            type = type.toLowerCase(); // convert to lower case for simplicity 
-            
-            do{
-                Util.clear();
-                // have to use if statemet ;~;
-                if(type.equals("return") || type.equals("exit") || type.equals("end")){
-                    //done = true;
-                    return;
-                    
-                }
-                else{ // 
-                    if(type.equals("rug") || type.equals("mat") || type.equals("Rug")){ // rug check
-                        // show rugs
-                        type = "Rug";
-                        item_idxs = this.inv.display_items_by_type(type);
+            try{
+                String type = in.StringPrompt(" -> ");
+                type = type.toLowerCase(); // convert to lower case for simplicity 
+
+                do{
+                    Util.clear();
+                    // have to use if statemet ;~;
+                    if(type.equals("return") || type.equals("exit") || type.equals("end")){
+                        //done = true;
+                        return;
 
                     }
-                    else if(type.equals("furniture") || type.equals("Furniture")){ // not many synonyms for this 
-                        // show
-                        type = "Furniture";
-                        item_idxs = this.inv.display_items_by_type(type);
+                    else{ // 
+                        if(type.equals("rug") || type.equals("mat") || type.equals("Rug")){ // rug check
+                            // show rugs
+                            type = "Rug";
+                            item_idxs = this.inv.display_items_by_type(type);
 
-                    }
-                    // decor
-                    else if(type.equals("decor") || type.equals("ornimation") || type.equals("decoration") || type.equals("Decor")){
-                        type = "Decor";
-                        item_idxs = this.inv.display_items_by_type(type);
-                    }
-                    //kitchen
-                    else if(type.equals("kitchen") || type.equals("cooking") || type.equals("Kitchen")){
-                        type = "Kitchen";
-                        item_idxs = this.inv.display_items_by_type(type);
-                    }
-                    //bed and bath
-                    else if(type.equals("bed") || type.equals("bath") 
-                            || type.equals("bath and bath") || type.equals("bed & bath")
-                             || type.equals("bed&bath") || type.equals("Bed & Bath")){
-                        type = "Bed & Bath";
-                        item_idxs = this.inv.display_items_by_type(type);
-                    }
-                    // home improvement
-                    else if(type.equals("tools") || type.equals("home improvement") || type.equals("Home Improvement")){
-                        type = "Home Improvement";
-                        item_idxs = this.inv.display_items_by_type(type);
-
-                    }
-                    //Outdoor
-                    else if(type.equals("outdoors") || type.equals("outside") || type.equals("outdoor") || type.equals("Outdoor")){ 
-                        // show
-                        type = "Outdoor";
-                        item_idxs = this.inv.display_items_by_type(type);
-
-
-                    }
-                    // end of display setup
-                    if(item_idxs.length > 0){
-                        String check = in.StringPrompt("Select an item -> ");
-                        if(check.equals("return") || check.equals("exit") || check.equals("end"))
-                             done = true;
-                        else{
-                             Util.clear();
-                            item_choice = Integer.parseInt(check);
-                            item_choice -= 1;
-                            try{
-                                 // display item in depth
-                                Util.println("---------------------------------------");
-                                Util.println(this.inv.get_database().get(type).get(item_choice).get_item_name());
-                                Util.println("" + Util.dollar_format(this.inv.get_database().get(type).get(item_choice).get_price()));
-                                Util.println(this.inv.get_database().get(type).get(item_choice).get_item_desc());
-                                Util.println("\n---------------------------------------");
-                                Util.println("1) add to cart"); // see if they want to get the item
-                                Util.println("2) look at another item ");
-                                Util.println("3) search again ");
-                                int sub_choice = in.IntPrompt("-> ");
-
-                                switch(sub_choice){
-                                    case 1: // add the item
-                                        this.CurrentUser.add_cart(this.inv.get_database().get(type).get(item_choice).get_item_id());
-                                        break;
-                                    case 2: // return
-                                        break;
-                                    case 3: // look at a different item
-                                        done = true;
-                                        break;
-                                }
-                            }catch(Exception e){
-                                // error occured
-                                //e.printStackTrace(); // uncomment to produce in depth error
-                                in.keyStroakPrompt(type + " [" + item_choice + "] There was a problem processing your choice. [Enter]");
-                            }
                         }
-                    }else{
-                        in.keyStroakPrompt("There was nothing found ;~;\n[Enter]");
-                        done = true; // got stuck in a loop cause of this boy
-                    
-                    }// this looks a little messy
-                    
-                }
-                // take in input
-            }while(!done);
+                        else if(type.equals("furniture") || type.equals("Furniture")){ // not many synonyms for this 
+                            // show
+                            type = "Furniture";
+                            item_idxs = this.inv.display_items_by_type(type);
+
+                        }
+                        // decor
+                        else if(type.equals("decor") || type.equals("ornimation") || type.equals("decoration") || type.equals("Decor")){
+                            type = "Decor";
+                            item_idxs = this.inv.display_items_by_type(type);
+                        }
+                        //kitchen
+                        else if(type.equals("kitchen") || type.equals("cooking") || type.equals("Kitchen")){
+                            type = "Kitchen";
+                            item_idxs = this.inv.display_items_by_type(type);
+                        }
+                        //bed and bath
+                        else if(type.equals("bed") || type.equals("bath") 
+                                || type.equals("bath and bath") || type.equals("bed & bath")
+                                 || type.equals("bed&bath") || type.equals("Bed & Bath")){
+                            type = "Bed & Bath";
+                            item_idxs = this.inv.display_items_by_type(type);
+                        }
+                        // home improvement
+                        else if(type.equals("tools") || type.equals("home improvement") || type.equals("Home Improvement")){
+                            type = "Home Improvement";
+                            item_idxs = this.inv.display_items_by_type(type);
+
+                        }
+                        //Outdoor
+                        else if(type.equals("outdoors") || type.equals("outside") || type.equals("outdoor") || type.equals("Outdoor")){ 
+                            // show
+                            type = "Outdoor";
+                            item_idxs = this.inv.display_items_by_type(type);
+
+
+                        }
+                        // end of display setup
+                        if(item_idxs.length > 0){
+                            String check = in.StringPrompt("Select an item -> ");
+                            if(check.equals("return") || check.equals("exit") || check.equals("end"))
+                                 done = true;
+                            else{
+                                 Util.clear();
+                                item_choice = Integer.parseInt(check);
+                                item_choice -= 1;
+                                try{
+                                     // display item in depth
+                                    Util.println("---------------------------------------");
+                                    Util.println(this.inv.get_database().get(type).get(item_choice).get_item_name());
+                                    Util.println("" + Util.dollar_format(this.inv.get_database().get(type).get(item_choice).get_price()));
+                                    Util.println(this.inv.get_database().get(type).get(item_choice).get_item_desc());
+                                    Util.println("\n---------------------------------------");
+                                    Util.println("1) add to cart"); // see if they want to get the item
+                                    Util.println("2) look at another item ");
+                                    Util.println("3) search again ");
+                                    int sub_choice = in.IntPrompt("-> ");
+
+                                    switch(sub_choice){
+                                        case 1: // add the item
+                                            this.CurrentUser.add_cart(this.inv.get_database().get(type).get(item_choice).get_item_id());
+                                            break;
+                                        case 2: // return
+                                            break;
+                                        case 3: // look at a different item
+                                            done = true;
+                                            break;
+                                    }
+                                }catch(Exception e){
+                                    // error occured
+                                    //e.printStackTrace(); // uncomment to produce in depth error
+                                    in.keyStroakPrompt(type + " [" + item_choice + "] There was a problem processing your choice. [Enter]");
+                                }
+                            }
+                        }else{
+
+                            in.keyStroakPrompt("There was nothing found ;~;\n[Enter]");
+                            Util.clear();
+                            for(String s : this.inv.getKeys()){
+                                Util.println(s + '\n');
+
+                            }
+                            in.keyStroakPrompt("[Enter]");
+                            done = true; // got stuck in a loop cause of this boy
+
+                        }// this looks a little messy
+
+                    }
+                    // take in input
+                }while(!done);
+            }catch(Exception e){}
 
         }while(searching);
     }
@@ -461,54 +477,55 @@ public class Menu {
             Util.clear();
             Util.println("---------- Search by Name ----------");
             Util.println("Enter a keyword.\nExample: -> Table");
-            
-            String key = in.StringPrompt(" -> ");
-            if(key.equals("return") || key.equals("exit") || key.equals("end")){
-                searching = false;
-                return;
-            }
-            do{
-                Util.clear();
-                ArrayList<Item> items_found = this.inv.display_items_by_name(key);
+            try{
+                String key = in.StringPrompt(" -> ");
+                if(key.equals("return") || key.equals("exit") || key.equals("end")){
+                    searching = false;
+                    return;
+                }
+                do{
+                    Util.clear();
+                    ArrayList<Item> items_found = this.inv.display_items_by_name(key);
 
-                if(items_found.size() > 0){
-                    String check = in.StringPrompt("Select an item -> ");
-                    if(check.equals("return") || check.equals("exit") || check.equals("end"))
-                        done = true;
-                    else{
-                        // select an item
-                        item_choice = Integer.parseInt(check);
-                        item_choice -= 1;
-                        try{
-                             // display item in depth
-                            Util.println("---------------------------------------");
-                            Util.println(items_found.get(item_choice).get_item_name());
-                            Util.println("" + Util.dollar_format(items_found.get(item_choice).get_price()));
-                            Util.println(items_found.get(item_choice).get_item_desc());
-                            Util.println("\n---------------------------------------");
-                            Util.println("1) add to cart "); // see if they want to get the item
-                            Util.println("2) look at another item ");
-                            Util.println("3) search again ");
-                            int sub_choice = in.IntPrompt("-> ");
+                    if(items_found.size() > 0){
+                        String check = in.StringPrompt("Select an item -> ");
+                        if(check.equals("return") || check.equals("exit") || check.equals("end"))
+                            done = true;
+                        else{
+                            // select an item
+                            item_choice = Integer.parseInt(check);
+                            item_choice -= 1;
+                            try{
+                                 // display item in depth
+                                Util.println("---------------------------------------");
+                                Util.println(items_found.get(item_choice).get_item_name());
+                                Util.println("" + Util.dollar_format(items_found.get(item_choice).get_price()));
+                                Util.println(items_found.get(item_choice).get_item_desc());
+                                Util.println("\n---------------------------------------");
+                                Util.println("1) add to cart "); // see if they want to get the item
+                                Util.println("2) look at another item ");
+                                Util.println("3) search again ");
+                                int sub_choice = in.IntPrompt("-> ");
 
-                            switch(sub_choice){
-                                case 1: // add the item
-                                    this.CurrentUser.add_cart(items_found.get(item_choice).get_item_id());
-                                    break;
-                                case 2: 
-                                    break;
-                                case 3: // return
-                                    done = true;
-                                    break;
+                                switch(sub_choice){
+                                    case 1: // add the item
+                                        this.CurrentUser.add_cart(items_found.get(item_choice).get_item_id());
+                                        break;
+                                    case 2: 
+                                        break;
+                                    case 3: // return
+                                        done = true;
+                                        break;
+                                }
+                            }catch(Exception e){
+                                // error occured
+                                //e.printStackTrace(); // uncomment to produce in depth error
+                                in.keyStroakPrompt(key + " [" + item_choice + "] There was a problem processing your choice. [Enter]");
                             }
-                        }catch(Exception e){
-                            // error occured
-                            //e.printStackTrace(); // uncomment to produce in depth error
-                            in.keyStroakPrompt(key + " [" + item_choice + "] There was a problem processing your choice. [Enter]");
                         }
                     }
-                }
-            }while(!done);
+                }while(!done);
+            }catch(Exception e){}
         }while(searching);
     }
     private void price_search(){
@@ -520,61 +537,64 @@ public class Menu {
             Util.clear();
             Util.println("---------- Search by Price ----------");
             Util.println("Enter a price.\nExample: -> 10.00");
-            String price = in.StringPrompt("-> ");
-            
-            if(price.equals("return") || price.equals("exit") || price.equals("end")){
-                searching = false;
-                return;
-            }
-            
-            if(price.charAt(0) == '$'){
-                price = price.substring(1); // cut it off
-            }
-            do{
-                double d_price = Double.parseDouble(price);
-                Util.clear();
-                ArrayList<Item> items_found = this.inv.display_items_by_price(d_price);
+            try{
+                String price = in.StringPrompt("-> ");
 
-                 if(items_found.size() > 0){
-                    // select an item
-                    Util.clear();
-                    String check = in.StringPrompt("Select an item -> ");
-                    if(check.equals("return") || check.equals("exit") || check.equals("end"))
-                        done = true;
-                    else{
-                        // select an item
-                        item_choice = Integer.parseInt(check);
-                        item_choice -= 1;
-                        try{
-                            // display item in depth
-                            Util.println("---------------------------------------");
-                            Util.println(items_found.get(item_choice).get_item_name());
-                            Util.println("" + Util.dollar_format(items_found.get(item_choice).get_price()));
-                            Util.println(items_found.get(item_choice).get_item_desc());
-                            Util.println("\n---------------------------------------");
-                            Util.println("1) add to cart"); // see if they want to get the item
-                            Util.println("2) look at another item ");
-                            Util.println("3) search again ");
-                            int sub_choice = in.IntPrompt("-> ");
-
-                            switch(sub_choice){
-                                case 1: // add the item
-                                    this.CurrentUser.add_cart(items_found.get(item_choice).get_item_id());
-                                    break;
-                                case 2: 
-                                    break;
-                                case 3: // return
-                                    done = true;
-                                    break;
-                            }
-                        }catch(Exception e){
-                            // error occured
-                            //e.printStackTrace(); // uncomment to produce in depth error
-                            in.keyStroakPrompt(price + " [" + item_choice + "] There was a problem processing your choice. [Enter]");
-                        }
-                    }//
+                if(price.equals("return") || price.equals("exit") || price.equals("end")){
+                    searching = false;
+                    return;
                 }
-            }while(!done);
+
+                if(price.charAt(0) == '$'){
+                    price = price.substring(1); // cut it off
+                }
+                do{
+                    double d_price = Double.parseDouble(price);
+                    Util.clear();
+                    ArrayList<Item> items_found = this.inv.display_items_by_price(d_price);
+
+                     if(items_found.size() > 0){
+                        // select an item
+                        Util.clear();
+                        String check = in.StringPrompt("Select an item -> ");
+                        if(check.equals("return") || check.equals("exit") || check.equals("end"))
+                            done = true;
+                        else{
+                            // select an item
+                            item_choice = Integer.parseInt(check);
+                            item_choice -= 1;
+                            try{
+                                // display item in depth
+                                Util.println("---------------------------------------");
+                                Util.println(items_found.get(item_choice).get_item_name());
+                                Util.println("" + Util.dollar_format(items_found.get(item_choice).get_price()));
+                                Util.println(items_found.get(item_choice).get_item_desc());
+                                Util.println("\n---------------------------------------");
+                                Util.println("1) add to cart"); // see if they want to get the item
+                                Util.println("2) look at another item ");
+                                Util.println("3) search again ");
+                                int sub_choice = in.IntPrompt("-> ");
+
+                                switch(sub_choice){
+                                    case 1: // add the item
+                                        this.CurrentUser.add_cart(items_found.get(item_choice).get_item_id());
+                                        break;
+                                    case 2: 
+                                        break;
+                                    case 3: // return
+                                        done = true;
+                                        break;
+                                }
+                            }catch(Exception e){
+                                // error occured
+                                //e.printStackTrace(); // uncomment to produce in depth error
+                                in.keyStroakPrompt(price + " [" + item_choice + "] There was a problem processing your choice. [Enter]");
+                            }
+                        }//
+                    }
+
+                }while(!done);
+            }catch(Exception e){}
              
         }while(searching);
     } 
@@ -611,38 +631,43 @@ public class Menu {
         Util.println("----------------------------------");
         Util.println("1) Continue to checkout");
         Util.println("2) Return to menu ");
-        int choice = in.IntPrompt("-> ");
-        // will ask user to check out
-        if(choice == 2){
-            this.menu_code = 3;
-        }
-        else if(choice == 1){
-            Util.clear();
-            // - enter in payment info
-            String card_num  = in.StringPrompt("Enter in your card number -> ");
-            String card_name = in.StringPrompt("Enter full name on card   ->");
-            
-            
-            // processes cart
-            for(String id : this.CurrentUser.getcart()){
-                this.inv.reduce_item(id, 1); // qty is going to be 1 for now
-                this.CurrentUser.add_history(id); // make sure we remember what users purchase
-                // - remove items qty
+        try{
+            int choice = in.IntPrompt("-> ");
+            // will ask user to check out
+            if(choice == 2){
+                this.menu_code = 3;
             }
-            // now make an invoice and add it to the invoice manager
-            Invoice invoice = new Invoice();
-            invoice.set_Amount(choice);
-            invoice.set_User(this.CurrentUser.get_userName());
-            invoice.set_InvoiceCode("" + this.invoiceManager.get_invoices().size());
-            this.invoiceManager.addInvoice(invoice);
-            // show purchase complete
-            Util.clear();
-            in.keyStroakPrompt("Order Placed!\n[Enter]");
-            
-            this.CurrentUser.getcart().clear(); // clear the users cart
-            // return to shop menu
-            this.menu_code = 3;
-        }
+            else if(choice == 1){
+                Util.clear();
+                // - enter in payment info
+                String card_num  = in.StringPrompt("Enter in your card number -> ");
+                String card_name = in.StringPrompt("Enter full name on card   ->");
+
+
+                // processes cart
+                Invoice invoice = new Invoice();
+                for(String id : this.CurrentUser.getcart()){
+                    this.inv.reduce_item(id, 1); // qty is going to be 1 for now
+                    this.CurrentUser.add_history(id); // make sure we remember what users purchase
+                    invoice.add_item(this.inv.return_by_id(id)); // add items to the invoice
+                    // - remove items qty
+                }
+                // now make an invoice and add it to the invoice manager
+
+                invoice.set_Amount(total);
+                invoice.set_User(this.CurrentUser.get_userName());
+                invoice.set_InvoiceCode("" + this.invoiceManager.get_invoices().size());
+
+                this.invoiceManager.addInvoice(invoice);
+                // show purchase complete
+                Util.clear();
+                in.keyStroakPrompt("Order Placed!\n[Enter]");
+
+                this.CurrentUser.getcart().clear(); // clear the users cart
+                // return to shop menu
+                this.menu_code = 3;
+            }
+        }catch(Exception e){}
         
     }
     
@@ -654,15 +679,17 @@ public class Menu {
         Util.println("1) UCLUB Membership");
         Util.println("2) Order History");
         Util.println("3) Return ");
-        int input = in.IntPrompt("->");
-        switch(input){
-            case 1: uclubSettings();
-                    break;
-            case 2: viewHistory();
-                    break;
-            case 3: this.menu_code = 3;
-                    break;
-        }
+        try{
+            int input = in.IntPrompt("->");
+            switch(input){
+                case 1: uclubSettings();
+                        break;
+                case 2: viewHistory();
+                        break;
+                case 3: this.menu_code = 3;
+                        break;
+            }
+        }catch(Exception e){}
         // view history.
         // change password
         // - ADMIN cannot be deleted
@@ -734,21 +761,25 @@ public class Menu {
         Util.println("3) View Inventory");
         Util.println("4) Logout");
         
-        int input = in.IntPrompt("->");
-        switch(input){
-            case 1: viewUserHistory();
-                    break;
-            case 2: viewInventory();
-                    break;
-            case 3: viewInvoices();
-                    break;
-            case 4: Util.clear();
-                    this.menu_code = 0;
-                    Util.println("Goodbye " + this.CurrentUser.get_userName());
-                    this.currentUser_index = -1;
-                    break;
-                
-        }// end of main section
+        try{ // for empty input
+            int input = in.IntPrompt("->");
+            switch(input){
+                case 1: viewUserHistory();
+                        break;
+                case 2: viewInvoices();
+                        break;
+                case 3: viewInventory();
+                        break;
+                case 4: Util.clear();
+                        this.menu_code = 0;
+                        Util.println("Goodbye " + this.CurrentUser.get_userName());
+                        this.currentUser_index = -1;
+                        break;
+
+            }// end of main section
+        }catch(Exception e){
+            
+        }
     }
     
     // when viewing all users history only show how many items they have purchased,
@@ -761,46 +792,48 @@ public class Menu {
             Util.println("1) View all user history ");
             Util.println("2) View one user ");
             Util.println("3) return");
-
-            int choice = in.IntPrompt("-> ");
-            // view all
-            if(choice == 1){
-                Util.clear();
-                Util.println("-------- All User History --------");
-                // loop through all users
-                for(User u : this.userManager.get_allUsers()){
-                    double total = 0.0;
-                    for(String s: u.get_history()){ // get a sum of all the items
-                        total += this.inv.return_by_id(s).get_price();
+            try{
+                int choice = in.IntPrompt("-> ");
+                // view all
+                if(choice == 1){
+                    Util.clear();
+                    Util.println("-------- All User History --------");
+                    // loop through all users
+                    for(User u : this.userManager.get_allUsers()){
+                        double total = 0.0;
+                        for(String s: u.get_history()){ // get a sum of all the items
+                            total += this.inv.return_by_id(s).get_price();
+                        }
+                        // show em
+                        Util.println("Items purchased - " + u.get_history().size());
+                        Util.println("Amount spent    - " + total);
+                        Util.println("----------------------------------");   
                     }
-                    // show em
-                    Util.println("Items purchased - " + u.get_history().size());
-                    Util.println("Amount spent    - " + total);
-                    Util.println("----------------------------------");   
+                    in.keyStroakPrompt("[Enter]");
+                }else if(choice == 2){
+                    Util.clear();
+                    Util.println("-------- Search User History --------");
+                    String user_name = in.StringPrompt("Enter username -> ");
+                    int user_index = this.userManager.checkUsername(user_name);
+                    if(user_index != -1){
+                        Util.println("user : " + user_name);
+                        for(String s : this.userManager.get_allUsers().get(user_index).get_history()){
+                            // show all history in depth
+                            Item temp = this.inv.return_by_id(s);
+                            Util.println(temp.get_item_name());
+                            Util.println(Util.dollar_format(temp.get_price()));
+                            Util.println("-------------------------------------");
+                        }
+                    }else{
+                        in.keyStroakPrompt("User not found [Enter]");
+                    }// done
+                }else if(choice == 3){
+                    Util.clear();
+                    searching = false;
                 }
-                in.keyStroakPrompt("[Enter]");
-            }else if(choice == 2){
-                Util.clear();
-                Util.println("-------- Search User History --------");
-                String user_name = in.StringPrompt("Enter username -> ");
-                int user_index = this.userManager.checkUsername(user_name);
-                if(user_index != -1){
-                    Util.println("user : " + user_name);
-                    for(String s : this.userManager.get_allUsers().get(user_index).get_history()){
-                        // show all history in depth
-                        Item temp = this.inv.return_by_id(s);
-                        Util.println(temp.get_item_name());
-                        Util.println(Util.dollar_format(temp.get_price()));
-                        Util.println("-------------------------------------");
-                    }
-                }else{
-                    in.keyStroakPrompt("User not found [Enter]");
-                }// done
-            }else if(choice == 3){
-                Util.clear();
-                searching = false;
+            }catch (Exception e){
+                // catch an empty input
             }
-            
             Util.clear();
             
        }while(searching);
@@ -815,35 +848,37 @@ public class Menu {
             Util.println("1) View catagories ");
             Util.println("2) Search by catagory ");
             Util.println("3) return ");
-            int choice = in.IntPrompt("-> ");
             
-            if(choice == 1){
-                Util.clear();
-                for(String s : this.inv.getKeys()){
-                    Util.println(s + '\n');
-                    
-                }
-                in.keyStroakPrompt("[Enter]");
-            }else if(choice == 2){
-                Util.clear();
-                String type = in.StringPrompt("Enter a catagory -> ");
-                try{
-                    Util.println("-------------------------------");
-                    Util.println("TYPE - " + type);
-                    for(Item i : this.inv.get_database().get(type)){
-                        Util.println(i.get_item_name());
-                        Util.println(Util.dollar_format(i.get_price()));
-                        Util.println("QTY - " + i.get_qty());
-                        Util.println("-------------------------------");
+            try{
+                int choice = in.IntPrompt("-> ");
+                if(choice == 1){
+                    Util.clear();
+                    for(String s : this.inv.getKeys()){
+                        Util.println(s + '\n');
+
                     }
                     in.keyStroakPrompt("[Enter]");
-                }catch(Exception e){
-                    in.keyStroakPrompt("Error searching [Enter]");
+                }else if(choice == 2){
+                    Util.clear();
+                    String type = in.StringPrompt("Enter a catagory -> ");
+                    try{
+                        Util.println("-------------------------------");
+                        Util.println("TYPE - " + type);
+                        for(Item i : this.inv.get_database().get(type)){
+                            Util.println(i.get_item_name());
+                            Util.println(Util.dollar_format(i.get_price()));
+                            Util.println("QTY - " + i.get_qty());
+                            Util.println("-------------------------------");
+                        }
+                        in.keyStroakPrompt("[Enter]");
+                    }catch(Exception e){
+                        in.keyStroakPrompt("Error searching [Enter]");
+                    }
+                }else if(choice == 3){
+                    Util.clear();
+                    searching = false;
                 }
-            }else if(choice == 3){
-                Util.clear();
-                searching = false;
-            }
+            }catch(Exception e){}
         }while(searching);
     }
     
