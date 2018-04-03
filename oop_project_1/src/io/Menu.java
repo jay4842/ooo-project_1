@@ -441,6 +441,7 @@ public class Menu {
                         }
                     }else{
                         in.keyStroakPrompt("There was nothing found ;~;\n[Enter]");
+                        done = true; // got stuck in a loop cause of this boy
                     
                     }// this looks a little messy
                     
@@ -734,21 +735,131 @@ public class Menu {
         Util.println("4) Logout");
         
         int input = in.IntPrompt("->");
-        //switch();
+        switch(input){
+            case 1: viewUserHistory();
+                    break;
+            case 2: viewInventory();
+                    break;
+            case 3: viewInvoices();
+                    break;
+            case 4: Util.clear();
+                    this.menu_code = 0;
+                    Util.println("Goodbye " + this.CurrentUser.get_userName());
+                    this.currentUser_index = -1;
+                    break;
+                
+        }// end of main section
     }
     
+    // when viewing all users history only show how many items they have purchased,
+    //  and how much they have spent. 
     private void viewUserHistory(){
-        
+       boolean searching = true;
+       do{
+            Util.clear();
+            Util.println("-------- View User History --------");
+            Util.println("1) View all user history ");
+            Util.println("2) View one user ");
+            Util.println("3) return");
+
+            int choice = in.IntPrompt("-> ");
+            // view all
+            if(choice == 1){
+                Util.clear();
+                Util.println("-------- All User History --------");
+                // loop through all users
+                for(User u : this.userManager.get_allUsers()){
+                    double total = 0.0;
+                    for(String s: u.get_history()){ // get a sum of all the items
+                        total += this.inv.return_by_id(s).get_price();
+                    }
+                    // show em
+                    Util.println("Items purchased - " + u.get_history().size());
+                    Util.println("Amount spent    - " + total);
+                    Util.println("----------------------------------");   
+                }
+                in.keyStroakPrompt("[Enter]");
+            }else if(choice == 2){
+                Util.clear();
+                Util.println("-------- Search User History --------");
+                String user_name = in.StringPrompt("Enter username -> ");
+                int user_index = this.userManager.checkUsername(user_name);
+                if(user_index != -1){
+                    Util.println("user : " + user_name);
+                    for(String s : this.userManager.get_allUsers().get(user_index).get_history()){
+                        // show all history in depth
+                        Item temp = this.inv.return_by_id(s);
+                        Util.println(temp.get_item_name());
+                        Util.println(Util.dollar_format(temp.get_price()));
+                        Util.println("-------------------------------------");
+                    }
+                }else{
+                    in.keyStroakPrompt("User not found [Enter]");
+                }// done
+            }else if(choice == 3){
+                Util.clear();
+                searching = false;
+            }
+            
+            Util.clear();
+            
+       }while(searching);
     }
     
+    // view by catagory
     private void viewInventory(){
-        
+        boolean searching = true;
+        do{
+            Util.clear();
+            Util.println("----------- Inventory -----------");
+            Util.println("1) View catagories ");
+            Util.println("2) Search by catagory ");
+            Util.println("3) return ");
+            int choice = in.IntPrompt("-> ");
+            
+            if(choice == 1){
+                Util.clear();
+                for(String s : this.inv.getKeys()){
+                    Util.println(s + '\n');
+                    
+                }
+                in.keyStroakPrompt("[Enter]");
+            }else if(choice == 2){
+                Util.clear();
+                String type = in.StringPrompt("Enter a catagory -> ");
+                try{
+                    Util.println("-------------------------------");
+                    Util.println("TYPE - " + type);
+                    for(Item i : this.inv.get_database().get(type)){
+                        Util.println(i.get_item_name());
+                        Util.println(Util.dollar_format(i.get_price()));
+                        Util.println("QTY - " + i.get_qty());
+                        Util.println("-------------------------------");
+                    }
+                    in.keyStroakPrompt("[Enter]");
+                }catch(Exception e){
+                    in.keyStroakPrompt("Error searching [Enter]");
+                }
+            }else if(choice == 3){
+                Util.clear();
+                searching = false;
+            }
+        }while(searching);
     }
     
     private void viewInvoices(){
-        
+        Util.clear();
+        Util.println("------------- Invoices -------------");
+        for(Invoice i : this.invoiceManager.get_invoices()){
+            Util.println(i.get_InvoiceCode());
+            Util.println(i.get_User());
+            Util.println(Util.dollar_format(i.get_Amount()));
+            Util.println("------------------------------------");
+        }
+        in.keyStroakPrompt("[Enter]");
     }
     
+    //Didnt get to this yet ;~;
     public void HelpMenu(){ // not a normal menu
         // To get here a user can type help/assistance or other words similar to help.
         

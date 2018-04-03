@@ -9,11 +9,12 @@ import util.*;
 import io.Input;
 
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.filechooser.*;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
@@ -128,6 +129,8 @@ public class Inventory {
             temp.add(i);// add an index
             
             // display the item info (name and price)
+            if(this.database.get(type).get(i).get_qty() <= 0)
+                Util.println("UNAVAILABLE");
             Util.println("["+(i+1) + "] " + this.database.get(type).get(i).get_item_name());
             Util.println("    " + Util.dollar_format(this.database.get(type).get(i).get_price()));
             Util.println("---------------------------");
@@ -155,6 +158,8 @@ public class Inventory {
         } // done checking to see if desired string is there
         // display the items found
         for(int i = 0; i < temp.size(); i++){
+            if(temp.get(i).get_qty() <= 0)
+                Util.println("UNAVAILABLE");
             Util.println("["+(i+1) + "] " + temp.get(i).get_item_name());
             Util.println("    " + Util.dollar_format(temp.get(i).get_price()));
             Util.println("---------------------------");
@@ -174,6 +179,8 @@ public class Inventory {
         }
         // display
         for(int i = 0; i < temp.size(); i++){
+            if(temp.get(i).get_qty() <= 0)
+                Util.println("UNAVAILABLE");
             Util.println("["+(i+1) + "] " + temp.get(i).get_item_name());
             Util.println("    " + Util.dollar_format(temp.get(i).get_price()));
             Util.println("---------------------------");
@@ -252,9 +259,38 @@ public class Inventory {
         //done
     }
 
+    public ArrayList<String> getKeys(){return this.keys;}
+    
     // exception handling later
     public void save_items(){
+        JSONObject items = new JSONObject();
+       JSONArray all_items = new JSONArray();
+       
+       // go through all the items and add them to the list
+       for(int i = 0; i < this.database.size(); i++){
+            for(int j = 0; j < this.database.get(keys.get(i)).size(); j++){
+                JSONObject temp = new JSONObject();
+                temp.put("Price", this.database.get(keys.get(i)).get(j).get_price());
+                temp.put("QTY", this.database.get(keys.get(i)).get(j).get_qty());
+                temp.put("ID", this.database.get(keys.get(i)).get(j).get_item_id());
+                temp.put("Type", this.database.get(keys.get(i)).get(j).get_type());
+                temp.put("Name", this.database.get(keys.get(i)).get(j).get_item_name());
+                temp.put("Des", this.database.get(keys.get(i)).get(j).get_item_desc());
+                all_items.add(temp);
+            }
+       }
         
+       items.put("Items", all_items);
+       
+       try (FileWriter file = new FileWriter("src/res/users.json")) {
+
+            file.write(items.toJSONString());
+            file.flush();
+            file.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
    
 }
