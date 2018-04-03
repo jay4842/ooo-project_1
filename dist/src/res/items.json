@@ -1,0 +1,354 @@
+
+{
+    "Items" :[
+        {
+            "QTY"   : "10",
+            "ID"    : "F1000",
+            "Price" : 215.0,
+            "Type"  : "Furniture",
+            "Name"  : "Cherry Brown Wooden Table 5 Piece Set",
+            "Des"   : "A counter hight table with four chairs."
+	},
+
+	{
+            "QTY"   : "5",
+            "ID"    : "D1001",
+            "Price" : 25.0,
+            "Type"  : "Decor",
+            "Name"  : "Life Size Penguin Plush",
+            "Des"   : "A penguin plush that is 4 feet tall!"
+	},
+        
+        {
+            "QTY"   : "25",
+            "ID"    : "R1002",
+            "Price" : 34.99,
+            "Type"  : "Rug",
+            "Name"  : "Cotton Craft Jute & Cotton Multi Chindi Braid Rug, Hand Woven Reversible, 4-Feet",
+            "Des"   : "This beautiful and unique rug is hand woven by skilled artisans. Hand made from strips of colorful recycled cotton rags also known as Chindi and eco-friendly Natural Jute yarns. Each rug is unique and different, no two are identical, the result of plying together of hundreds of colorful strips of Cotton Chindi. This will fit in and complement just about any decor. We hope you like and enjoy this rug as much as we have enjoyed making and bringing it for you."
+	},
+        
+        {
+            "QTY"   : "55",
+            "ID"    : "B1003",
+            "Price" : 14.99,
+            "Type"  : "Bed & Bath",
+            "Name"  : "Cotton Washcloth Hand Towels 4 Pieces",
+            "Des"   : " High Quality Cotton: Made with 100% Cotton. Doubled stitched to prevent fraying and promote longevity and durability."
+	},
+        
+        {
+            "QTY"   : "32",
+            "ID"    : "H1004",
+            "Price" : 34.99,
+            "Type"  : "Home Improvement",
+            "Name"  : "Black & Decker BDCDD120C 20V MAX Lithium Single Speed Drill/Driver",
+            "Des"   : "The BLACK+DECKER BDCDD120C 20V MAX* Lithium Single Speed Drill/Driver allows you to hang pictures, shelves and more in a snap with this compact, do-it-all drill/driver. Small and light than most, it fits in tight spaces (with an LED to light your way) while still delivering the power needed to complete most household tasks. The compact design, 35% smaller than the GC1801 Drill/Driver, allows you to fit in tighter spaces (behind appliances, inside cabinets, inside closets, etc.). This tool is lightweight at 2.5 lbs and provides less fatigue and makes it easy to move from room to room. The keyless chuck allows for easy bit changes. An 11-position clutch helps prevent stripping screws or damaging material and an LED light illuminates the project surface. The mid-handle design helps make the drill comfortable to use. Part of the 20V MAX* System - 1 System. Endless Tasks. Power for your Style. Includes: (1) 20V MAX* Battery, (1) Battery Charger, (1) Double Ended Bit."
+	},
+        {
+            "QTY"   : "55",
+            "ID"    : "O1005",
+            "Price" : 10.99,
+            "Type"  : "Outdoor",
+            "Name"  : "Rambler's Peak Dry Bag - Reliable 10L Waterproof Bag Great For Fishing, Kayaking, Camping, Beach, Boating, Hiking, Snowboarding and More - Heavy Duty Dry Sack Built to Last",
+            "Des"   : "Made of 500D PVC non-rip material, with careful and deliberate heavy-duty construction, fusion welded seams, and reinforced vinyl at stress points. This bag is perfect for storing all your lightweight essentials under any conditions. The bag features a removable, reinforced shoulder strap for convenience. Whether you're going for a day on the beach or hitting some Category V rapids, we've got you covered."
+	},
+        {
+            "QTY"   : "25",
+            "ID"    : "D1006",
+            "Price" : 19.99,
+            "Type"  : "Decor",
+            "Name"  : "Potted Artificial Mini Succulent Plants, Set of 3",
+            "Des"   : "Brighten up your home or office with these artificial succulent plants. The small size of the potted plants in this set of 3 makes them ideal for any space, from a windowsill in your kitchen to the counter in your bathroom to a corner of your office desk. The dark brown ceramic pots fit in beautifully with any décor, and the striking, distinctive shapes of these artificial plants make them ideal decorative accents and conversation pieces. For lots of decorative flair with no water or maintenance, this set of 3 artificial succulents is the perfect choice."
+        
+        },
+        {
+            "QTY"   : "100",
+            "ID"    : "D1007",
+            "Price" : 19.99,
+            "Type"  : "Decor",
+            "Name"  : "InnoGear 300ml Aromatherapy Essential Oil Diffuser Cool Mist Humidifier Waterless Auto Shut-off with 3 Timers and 7 LED Color Changing Lights",
+            "Des"   : "Compared to 500ml diffuser,this product looks adorable with 300ml size and still powerful to last for more than 5 hours. InnoGear 5 in 1 multifunctional aromatherapy diffuser, humidifier, air purifier, ionizer, night light. It helps you discover the transformative, aromatic power of essential oils, improves air quality and prevents damage from second hand smoke and stale air, works as a humidifier to improve the quality of air and makes breathing easy, functions as an ionizer by releasing negative ions into the air, helps to lift your mood and relieve stress. "
+        },
+        
+        {
+            "QTY"   : "12",
+            "ID"    : "F1008",
+            "Price" : 169.00,
+            "Type"  : "Furniture",
+            "Name"  : "Giantex 5 Pcs Wood Dining Table Set",
+            "Des"   : "Kitchen Dinette Table Set w/ 4 Storage Ottoman Stool"
+        },
+
+        {
+            "QTY"   : "10",
+            "ID"    : "F1009",
+            "Price" : 129.00,
+            "Type"  : "Furniture",
+            "Name"  : "Merax Adustable Foldable Modern Leisure Sofa Bed",
+            "Des"   : "Video Gaming Sofa with Two Pillows (brown)"
+        },
+
+        {
+            "QTY"   : "15",
+            "ID"    : "F1010",
+            "Price" : 259.00,
+            "Type"  : "Furniture",
+            "Name"  : "Black Storage Chaise Lounge Sofa Chair",
+            "Des"   : "Couch for Your Bedroom or Living Room,organize and Update Your Home"
+        },
+
+       {
+            "QTY"   : "9",
+            "ID"    : "F1011",
+            "Price" : 166.43,
+            "Type"  : "Furniture",
+            "Name"  : "Cleveland Brown Leather Curved Chaise",
+            "Des"   : "Lounge Chair"
+        },
+
+{
+            "QTY"   : "5",
+            "ID"    : "D1012",
+            "Price" : 25.0,
+            "Type"  : "Decor",
+            "Name"  : "Life Size Penguin Plush",
+            "Des"   : "A penguin plush that is 4 feet tall!"
+},
+        
+        {
+            "QTY"   : "5",
+            "ID"    : "D1013",
+            "Price" : 25.85,
+            "Type"  : "Decor",
+            "Name"  : "Moon Lamp",
+            "Des"   : "Lampwin 5.9 inch USB Rechargeable Dimmable LED 3D Full Moon Light Lantern "
+},
+
+        {
+            "QTY"   : "15",
+            "ID"    : "D1014",
+            "Price" : 8.88,
+            "Type"  : "Decor",
+            "Name"  : "Star Cluster/Space Decor Tapestry",
+            "Des"   : "Outer Space Tapestry Decorations Galaxy Stars Universe Milky Way, Bedroom Living Room Dorm Wall Hanging Tapestry-Navy Purple/Berry Turquoise  "
+},
+
+        {
+            "QTY"   : "24",
+            "ID"    : "D1015",
+            "Price" : 62.80,
+            "Type"  : "Decor",
+            "Name"  : "Horses Posters and Prints Modern Landscape ",
+            "Des"   : "Painting Pictures Wall Art for Living Room, Home Decor Gallery-wrapped Canvas Art 5 Piece Set Framed Ready to Hang (60''W x 32''H)"
+},
+
+       {
+            "QTY"   : "4",
+            "ID"    : "D1016",
+            "Price" : 50.90,
+            "Type"  : "Decor",
+            "Name"  : "Design Toscano Eye of Horus Fine Ceramic Offering Vessel",
+            "Des"   : "Hand-cast using real crushed stone bonded with high quality designer resin"
+},
+        
+        {
+            "QTY"   : "25",
+            "ID"    : "R1017",
+            "Price" : 34.99,
+            "Type"  : "Rug",
+            "Name"  : "Cotton Craft Jute & Cotton Multi Chindi Braid Rug, Hand Woven Reversible, 4-Feet",
+            "Des"   : "This beautiful and unique rug is hand woven by skilled artisans. Hand made from strips of colorful recycled cotton rags also known as Chindi and eco-friendly Natural Jute yarns. Each rug is unique and different, no two are identical, the result of plying together of hundreds of colorful strips of Cotton Chindi. This will fit in and complement just about any decor. We hope you like and enjoy this rug as much as we have enjoyed making and bringing it for you."
+},
+        
+        {
+            "QTY"   : "25",
+            "ID"    : "R1018",
+            "Price" : 64.31,
+            "Type"  : "Rug",
+            "Name"  : "Unique Loom Sofia Collection",
+            "Des"   : "Navy Blue 5 x 8 Area Rug (5' x 8')"
+},
+
+        {
+            "QTY"   : "17",
+            "ID"    : "R1019",
+            "Price" : 29.00,
+            "Type"  : "Rug",
+            "Name"  : "Ustide Fashion Design Rug",
+            "Des"   : "Big Tree Rug Round Area Rugs Non-skid Yoga Mat Living Room/Bedroom Carpet"
+},
+
+        {
+            "QTY"   : "22",
+            "ID"    : "R1020",
+            "Price" : 29.99,
+            "Type"  : "Rug",
+            "Name"  : "Ultra Soft 4.5 cm Thick Indoor Modern Area Rugs",
+            "Des"   : "New Arrival Fashion Color Bedroom/Livingroom"
+},
+
+       {
+            "QTY"   : "30",
+            "ID"    : "R1021",
+            "Price" : 29.99,
+            "Type"  : "Rug",
+            "Name"  : "10015 Blue 5'2x7'2 Area Rug Carpet Large New",
+            "Des"   : "Persian Area Rug Made in Turkey"
+},
+        
+        {
+            "QTY"   : "55",
+            "ID"    : "B1022",
+            "Price" : 14.99,
+            "Type"  : "Bed & Bath",
+            "Name"  : "Cotton Washcloth Hand Towels 4 Pieces",
+            "Des"   : " High Quality Cotton: Made with 100% Cotton. Doubled stitched to prevent fraying and promote longevity and durability."
+},
+        
+        {
+            "QTY"   : "82",
+            "ID"    : "B1023",
+            "Price" : 11.99,
+            "Type"  : "Bed & Bath",
+            "Name"  : "AmazonBasics Banded Bath Mat",
+            "Des"   : " 20 x 31 inch, Navy Blue"
+},
+
+        {
+            "QTY"   : "25",
+            "ID"    : "B1024",
+            "Price" : 11.99,
+            "Type"  : "Bed & Bath",
+            "Name"  : "Americano Casa Super Soft Egyptian cotton 6 PC sheet set 800 TC",
+            "Des"   : "Italian finish Bed sheet fits upto 19 inch deep pocket with Extra two pillowcases Made In USA Queen, Elephant Grey"
+},
+
+        {
+            "QTY"   : "35",
+            "ID"    : "B1025",
+            "Price" : 29.19,
+            "Type"  : "Bed & Bath",
+            "Name"  : "Zenna Home 2130NN, Tension Corner Pole ",
+            "Des"   : "Caddy, Satin Nickel"
+},
+
+        {
+            "QTY"   : "27",
+            "ID"    : "B1026",
+            "Price" : 27.99,
+            "Type"  : "Bed & Bath",
+            "Name"  : "Bamboo Floor Mat",
+            "Des"   : "Architecturally Pleasing, Elevates you to Dry Off - Rust and Mildew Resistant - Fully Guaranteed"
+},
+
+        {
+            "QTY"   : "27",
+            "ID"    : "B1027",
+            "Price" : 27.99,
+            "Type"  : "Bed & Bath",
+            "Name"  : "Bamboo Floor Mat",
+            "Des"   : "Architecturally Pleasing, Elevates you to Dry Off - Rust and Mildew Resistant - Fully Guaranteed"
+},
+
+       {
+            "QTY"   : "27",
+            "ID"    : "B1028",
+            "Price" : 27.99,
+            "Type"  : "Bed & Bath",
+            "Name"  : "Etekcity Digital Body Weight Bathroom Scale",
+            "Des"   : "With Body Tape Measure, Tempered Glass, 400 Pounds Scales"
+},
+        
+        {
+            "QTY"   : "32",
+            "ID"    : "H1029",
+            "Price" : 34.99,
+            "Type"  : "Home Improvement",
+            "Name"  : "Black & Decker BDCDD120C 20V MAX Lithium Single Speed Drill/Driver",
+            "Des"   : "The BLACK+DECKER BDCDD120C 20V MAX* Lithium Single Speed Drill/Driver allows you to hang pictures, shelves and more in a snap with this compact, do-it-all drill/driver. Small and light than most, it fits in tight spaces (with an LED to light your way) while still delivering the power needed to complete most household tasks. The compact design, 35% smaller than the GC1801 Drill/Driver, allows you to fit in tighter spaces (behind appliances, inside cabinets, inside closets, etc.). This tool is lightweight at 2.5 lbs and provides less fatigue and makes it easy to move from room to room. The keyless chuck allows for easy bit changes. An 11-position clutch helps prevent stripping screws or damaging material and an LED light illuminates the project surface. The mid-handle design helps make the drill comfortable to use. Part of the 20V MAX* System - 1 System. Endless Tasks. Power for your Style. Includes: (1) 20V MAX* Battery, (1) Battery Charger, (1) Double Ended Bit."
+},
+        {
+            "QTY"   : "120",
+            "ID"    : "H1030",
+            "Price" : 16.98,
+            "Type"  : "Home Improvement",
+            "Name"  : "Rust-Oleum 287722 ",
+            "Des"   : "Ultra Matte Interior Chalked Paint 30 oz, Clear"
+},
+
+        {
+            "QTY"   : "103",
+            "ID"    : "H1031",
+            "Price" : 226.00,
+            "Type"  : "Home Improvement",
+            "Name"  : "Nest Learning Thermostat",
+            "Des"   : "Easy Temperature Control for Every Room in Your House, Stainless Steel (Third Generation)"
+},
+
+       {
+            "QTY"   : "88",
+            "ID"    : "H1032",
+            "Price" : 97.87,
+            "Type"  : "Home Improvement",
+            "Name"  : "Samsung SmartThings ",
+            "Des"   : "Smart Home Hub Add smart devices and put your home to work. Choose from a wide range of compatible devices, including lights, speakers, locks, thermostats, sensors, and more."
+},
+
+       {
+            "QTY"   : "75",
+            "ID"    : "H1033",
+            "Price" : 97.87,
+            "Type"  : "Home Improvement",
+            "Name"  : "Schlage Z-Wave Connect Camelot Touchscreen Deadbolt",
+            "Des"   : "with Built-In Alarm, Works with Amazon Alexa via SmartThings, Wink or Iris, Satin Nickel, BE469 CAM 619"
+},
+
+       {
+            "QTY"   : "65",
+            "ID"    : "H1034",
+            "Price" : 27.99,
+            "Type"  : "Home Improvement",
+            "Name"  : "Samsung SmartThings Arrival Sensor",
+            "Des"   : "Get alerts when people and pets approach and leave a specified area, such as a home or office.Trigger different actions to take place when you arrive or leave home"
+},
+
+        {
+            "QTY"   : "55",
+            "ID"    : "O1035",
+            "Price" : 10.99,
+            "Type"  : "Outdoor",
+            "Name"  : "Rambler's Peak Dry Bag - Reliable 10L Waterproof Bag Great For Fishing, Kayaking, Camping, Beach, Boating, Hiking, Snowboarding and More - Heavy Duty Dry Sack Built to Last",
+            "Des"   : "Made of 500D PVC non-rip material, with careful and deliberate heavy-duty construction, fusion welded seams, and reinforced vinyl at stress points. This bag is perfect for storing all your lightweight essentials under any conditions. The bag features a removable, reinforced shoulder strap for convenience. Whether you're going for a day on the beach or hitting some Category V rapids, we've got you covered."
+},
+
+        {
+            "QTY"   : "25",
+            "ID"    : "D1036",
+            "Price" : 19.99,
+            "Type"  : "Decor",
+            "Name"  : "Potted Artificial Mini Succulent Plants, Set of 3",
+            "Des"   : "Brighten up your home or office with these artificial succulent plants. The small size of the potted plants in this set of 3 makes them ideal for any space, from a windowsill in your kitchen to the counter in your bathroom to a corner of your office desk. The dark brown ceramic pots fit in beautifully with any décor, and the striking, distinctive shapes of these artificial plants make them ideal decorative accents and conversation pieces. For lots of decorative flair with no water or maintenance, this set of 3 artificial succulents is the perfect choice."
+        
+        },
+        {
+            "QTY"   : "30",
+            "ID"    : "O1037",
+            "Price" : 31.97,
+            "Type"  : "Outdoor",
+            "Name"  : "Brightest and Best LED Headlamp 6000 Lumen flashlight",
+            "Des"   : "IMPROVED LED, Rechargeable 18650 headlight flashlights Waterproof Hard Hat Light, Bright Head Lights, Running or Camping headlamps"
+        },
+        {
+            "QTY"   : "100",
+            "ID"    : "D1039",
+            "Price" : 19.99,
+            "Type"  : "Decor",
+            "Name"  : "InnoGear 300ml Aromatherapy Essential Oil Diffuser Cool Mist Humidifier Waterless Auto Shut-off with 3 Timers and 7 LED Color Changing Lights",
+            "Des"   : "Compared to 500ml diffuser,this product looks adorable with 300ml size and still powerful to last for more than 5 hours. InnoGear 5 in 1 multifunctional aromatherapy diffuser, humidifier, air purifier, ionizer, night light. It helps you discover the transformative, aromatic power of essential oils, improves air quality and prevents damage from second hand smoke and stale air, works as a humidifier to improve the quality of air and makes breathing easy, functions as an ionizer by releasing negative ions into the air, helps to lift your mood and relieve stress. "
+        }
+        
+        
+        
+    ]
+}
